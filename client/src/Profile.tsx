@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
-import { IUser } from '../../src/models/user';
+import { IAdditionalProps } from './App';
 
-const Profile: React.FC<IUser> = ({...user}) => {
+const Profile: React.FC<IAdditionalProps> = ({user}) => {
   const [ books, setBooks ] = useState([]);
 
   // get all the books

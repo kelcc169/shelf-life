@@ -7,7 +7,7 @@ import Library, { ILibrary } from '../models/library';
 
 // GET /api/library/:id - get the books in the user's library
 router.get('/library/:id', (req, res) => {
-  Library.findOne({userId: req.params.id}, (err, library: ILibrary) => {
+  Library.findById(req.params.id).populate('books').exec((err, library: ILibrary) => {
     if (err) res.json(err)
     res.json(library)
   })
@@ -21,21 +21,32 @@ router.get('/books', (req, res) => {
   })
 })
 
-// POST /api/books - post a book to a library!
-router.post('/books/:id', (req, res) => {
-  Book.create({
-    title: req.body.title,
-    author: req.body.author,
-    isbn: req.body.isbn,
-    library: req.params.id
-  }, (err, book: IBook) => {
+// POST /api/library/:id - post a book to a library!
+router.post('/library/:id', (req, res) => {
+  Book.findOne({isbn: req.body.isbn}, (err, book: IBook) => {
     if (err) res.json(err)
-    Library.findById(req.params.id, (err, library: ILibrary) => {
-      if (err) res.json(err)
-      library.books.push(book._id)
-      library.save()
-      res.json(library)
-    })
+    if (!book) {
+      Book.create({
+        title: req.body.title,
+        author: req.body.author,
+        isbn: req.body.isbn,
+      }, (err, book: IBook) => {
+        if (err) res.json(err)
+        Library.findById(req.params.id, (err, library: ILibrary) => {
+          if (err) res.json(err)
+          library.books.push(book._id)
+          library.save()
+          res.json(library)
+        })
+      })
+    } else {
+      Library.findById(req.params.id, (err, library: ILibrary) => {
+        if (err) res.json(err)
+        library.books.push(book._id)
+        library.save()
+        res.json(library)
+      })
+    }
   })
 })
 

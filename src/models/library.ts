@@ -1,6 +1,5 @@
 import mongoose from 'mongoose';
 import { Schema } from 'mongoose';
-import { runInNewContext } from 'vm';
 
 const librarySchema = new Schema({
   userId: {type: mongoose.Schema.Types.ObjectId, ref: 'User'},

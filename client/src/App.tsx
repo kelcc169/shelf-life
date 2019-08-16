@@ -17,6 +17,9 @@ import { IUser } from '../../src/models/user';
 export interface ISetTokens {
   setToken: Function;
 }
+export interface IAdditionalProps {
+  user: IUser
+}
 
 // APP!
 const App: React.FC = () => {
@@ -60,7 +63,7 @@ const App: React.FC = () => {
   if (Object.keys(user).length > 0) {
     contents = (
       <>
-        <Profile {...user} />
+        <Profile user={user} />
         <p onClick={logout}>Log Out!</p>
       </>
     )

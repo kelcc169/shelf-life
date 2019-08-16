@@ -4,8 +4,7 @@ import { Schema } from 'mongoose';
 const bookSchema = new Schema({
   title: String,
   author: String,
-  isbn: String,
-  library: [{type: mongoose.Schema.Types.ObjectId, ref: 'Library'}]
+  isbn: String
 })
 
 export interface IBook extends mongoose.Document{

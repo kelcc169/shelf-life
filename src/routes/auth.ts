@@ -14,7 +14,7 @@ router.post('/signup', (req, res) => {
         name: req.body.name,
         email: req.body.email,
         password: req.body.password
-      }, (err, user) => {
+      }, (err, user: IUser) => {
         if (err) {
           res.json({type: 'error', message: 'Database error while creating user'})
         } else {
@@ -26,7 +26,8 @@ router.post('/signup', (req, res) => {
             if (err) {
               res.json({type: 'error', message: 'Database error while creating library'})
             } else {
-              console.log(library._id)
+              user.library = library._id
+              user.save()
               var token = jwt.sign(user.toObject(), process.env.JWT_SECRET, {
                 expiresIn: '1d'
               });
