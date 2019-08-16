@@ -24,4 +24,7 @@ db.on('error', (err) => {
 import authRouter from './routes/auth';
 app.use('/auth', authRouter)
 
+import apiRouter from './routes/api';
+app.use('/api', apiRouter);
+
 app.listen(process.env.PORT || 3001);

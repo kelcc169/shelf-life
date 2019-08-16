@@ -2,8 +2,8 @@ import express from 'express';
 const router = express.Router();
 import jwt from 'jsonwebtoken';
 
-import User from '../models/user';
-import { IUser } from '../models/user';
+import User, { IUser } from '../models/user';
+import Library, { ILibrary } from '../models/library';
 
 router.post('/signup', (req, res) => {
   User.findOne({email: req.body.email}, (err, user: IUser) => {
@@ -18,10 +18,21 @@ router.post('/signup', (req, res) => {
         if (err) {
           res.json({type: 'error', message: 'Database error while creating user'})
         } else {
-          var token = jwt.sign(user.toObject(), process.env.JWT_SECRET, {
-            expiresIn: '1d'
-          });
-          res.status(200).json({type: 'success', user: user.toObject(), token})
+          // create a library using the user id
+          Library.create({
+            userId: user._id,
+            books: []
+          }, (err, library: ILibrary) => {
+            if (err) {
+              res.json({type: 'error', message: 'Database error while creating library'})
+            } else {
+              console.log(library._id)
+              var token = jwt.sign(user.toObject(), process.env.JWT_SECRET, {
+                expiresIn: '1d'
+              });
+              res.status(200).json({type: 'success', user: user.toObject(), token})
+            }
+          })
         }
       })
     }

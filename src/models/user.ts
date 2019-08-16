@@ -20,7 +20,8 @@ const userSchema = new Schema({
     required: [true, 'You must enter an email'],
     minlength: [5, 'Email must be between 5 and 99 characters'],
     maxlength: [99, 'Email must be between 5 and 99 characters']
-  }
+  },
+  library: {type: mongoose.Schema.Types.ObjectId, ref: 'Library'}
 });
 
 userSchema.set('toObject', {
@@ -28,7 +29,8 @@ userSchema.set('toObject', {
     let returnJson = {
       _id: ret._id,
       name: ret.name,
-      email: ret.email
+      email: ret.email,
+      library: ret.library
     }
     return returnJson
   }
@@ -53,17 +55,13 @@ interface IAuthenticated {
   (password: string): boolean
 }
 
-interface IModelToObject {
-  (): IUser
-}
-
-export interface IUser {
-  _id?: string;
+export interface IUser extends mongoose.Document {
+  _id: string;
   name: string;
   email: string;
   password: string;
+  library: string;
   authenticated: IAuthenticated;
-  toObject: IModelToObject;
 }
 
 export default mongoose.model('User', userSchema);

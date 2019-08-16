@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
-import { ILiftTokens } from './App';
+import { ISetTokens } from './App';
 import axios from 'axios';
 
-const Signup: React.FC<ILiftTokens> = ({liftToken}) => {
+const Signup: React.FC<ISetTokens> = ({setToken}) => {
   const [ name, setName ] = useState<string>('');
   const [ email, setEmail ] = useState<string>('');
   const [ password, setPassword ] = useState<string>('');
@@ -22,7 +22,7 @@ const Signup: React.FC<ILiftTokens> = ({liftToken}) => {
 
   function handleSubmit(e: React.FormEvent) {
     console.log('submitting...')
-    e.preventDefault()
+    e.preventDefault();
     axios.post('/auth/signup', {
       name: name,
       email: email,
@@ -38,8 +38,8 @@ const Signup: React.FC<ILiftTokens> = ({liftToken}) => {
       } else {
         console.log('i maked this')
         localStorage.setItem('mernToken', res.data.token);
-        setMessage('')
-        liftToken(res.data.token);
+        setMessage('');
+        setToken(res.data.token);
       }
     }).catch(err => {
       setMessage('Maximum accounts exceeded. Please try again later')
