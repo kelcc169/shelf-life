@@ -2,9 +2,10 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import Login from './Login';
 import Signup from './Signup';
+import Profile from './Profile';
 import './App.css';
 
-import { IUser } from '../../src/models/user'
+import { IUser } from '../../src/models/user';
 
 export interface ILiftTokens {
   liftToken: Function;
@@ -14,9 +15,20 @@ const App: React.FC = () => {
   const [ user, setUser ] = useState<IUser>({} as IUser)
   const [ token, setToken] = useState<string>('')
   const [ errorMessage, setErrorMessage ] = useState<string>('')
+  
+  function liftToken(token: string) {
+    setToken(token)
+  }
 
-  // checking for local token to validate user
-  function checkForLocalToken() {
+  // log out of program
+  function logout(): void {
+    localStorage.removeItem('mernToken');
+    setToken('');
+    setUser({} as IUser);
+  }
+
+  // check for local token when loading OR when token changes.
+  useEffect(() => {
     var token = localStorage.getItem('mernToken');
     if (!token || token === 'undefined') {
       localStorage.removeItem('mernToken');
@@ -38,29 +50,13 @@ const App: React.FC = () => {
           }
         })
     }
-  }
-
-  function liftToken(token: string) {
-    setToken(token)
-  }
-
-  // log out of program
-  function logout(): void {
-    localStorage.removeItem('mernToken');
-    setToken('');
-    setUser({} as IUser);
-  }
-
-  // check for local token when loading OR when token changes.
-  useEffect(() => {
-    checkForLocalToken();
-  }, [token])
+  }, [token, errorMessage])
 
   var contents;
   if (Object.keys(user).length > 0) {
     contents = (
       <>
-        <p>Hello, {user.name}</p>
+        <Profile {...user} />
         <p onClick={logout}>Log Out!</p>
       </>
     )
@@ -74,6 +70,7 @@ const App: React.FC = () => {
     )
   }
 
+  // add 
   return (
     <>
       {contents}

@@ -1,9 +1,9 @@
 import express from 'express';
 const router = express.Router();
+import jwt from 'jsonwebtoken';
 
 import User from '../models/user';
 import { IUser } from '../models/user';
-import jwt from 'jsonwebtoken';
 
 router.post('/signup', (req, res) => {
   User.findOne({email: req.body.email}, (err, user: IUser) => {

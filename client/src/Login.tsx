@@ -27,7 +27,7 @@ const Login: React.FC<ILiftTokens> = ({liftToken}) => {
         setEmail('');
         setPassword('');
         setMessage(res.data.message);
-        console.log(message)
+        console.log(message);
       } else {
         console.log('i found this')
         localStorage.setItem('mernToken', res.data.token);
