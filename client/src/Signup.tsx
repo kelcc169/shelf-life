@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
-import { ISetTokens } from './App';
 import axios from 'axios';
+
+import { ISetTokens } from './interfaces';
 
 const Signup: React.FC<ISetTokens> = ({setToken}) => {
   const [ name, setName ] = useState<string>('');
@@ -21,7 +22,6 @@ const Signup: React.FC<ISetTokens> = ({setToken}) => {
   }
 
   function handleSubmit(e: React.FormEvent) {
-    console.log('submitting...')
     e.preventDefault();
     axios.post('/auth/signup', {
       name: name,
@@ -29,14 +29,12 @@ const Signup: React.FC<ISetTokens> = ({setToken}) => {
       password: password
     }).then(res => {
       if (res.data.type === 'error') {
-        console.log('nope!')
         setName('');
         setEmail('');
         setPassword('');
         setMessage(res.data.message);
         console.log(message)
       } else {
-        console.log('i maked this')
         localStorage.setItem('mernToken', res.data.token);
         setMessage('');
         setToken(res.data.token);

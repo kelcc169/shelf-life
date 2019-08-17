@@ -1,7 +1,7 @@
 import express from 'express';
 const router = express.Router();
 
-import User, { IUser } from '../models/user';
+// import User, { IUser } from '../models/user';
 import Book, { IBook } from '../models/book';
 import Library, { ILibrary } from '../models/library';
 

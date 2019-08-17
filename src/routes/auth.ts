@@ -7,6 +7,7 @@ import Library, { ILibrary } from '../models/library';
 
 router.post('/signup', (req, res) => {
   User.findOne({email: req.body.email}, (err, user: IUser) => {
+    console.log('looked for email')
     if (user) {
       res.json({type: 'error', message: 'Email already exists'})
     } else {
@@ -18,7 +19,6 @@ router.post('/signup', (req, res) => {
         if (err) {
           res.json({type: 'error', message: 'Database error while creating user'})
         } else {
-          // create a library using the user id
           Library.create({
             userId: user._id,
             books: []

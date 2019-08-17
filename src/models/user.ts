@@ -51,7 +51,7 @@ userSchema.methods.authenticated = function(password: string) {
   return bcrypt.compareSync(password, plaintext)
 }
 
-interface IAuthenticated {
+export interface IAuthenticated {
   (password: string): boolean
 }
 

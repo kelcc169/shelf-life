@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
-import { ISetTokens } from './App';
 import axios from 'axios';
+
+import { ISetTokens } from './interfaces';
 
 const Login: React.FC<ISetTokens> = ({setToken}) => {
   const [ email, setEmail ] = useState<string>('');
