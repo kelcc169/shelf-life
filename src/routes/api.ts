@@ -36,7 +36,7 @@ router.post('/library/:id', (req, res) => {
           if (err) res.json(err)
           library.books.push(book._id)
           library.save()
-          res.json(library)
+          res.json(book)
         })
       })
     } else {

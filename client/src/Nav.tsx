@@ -1,11 +1,14 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-const Nav: React.FC = () => {
+import { INav } from './interfaces';
+
+const Nav: React.FC<INav> = ({logout}) => {
   return(
     <div>
-      <Link to='/' >Home Page</Link>
-      <Link to='/library/add' >Add A Book</Link>
+      <Link to='/library' ><button>Library</button></Link>
+      <Link to='/library/add' ><button>Add A Book</button></Link>
+      <button onClick={(e) => logout(e)}>Logout</button>
     </div>
   )
 }

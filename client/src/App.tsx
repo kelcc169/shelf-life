@@ -10,6 +10,7 @@ import {
 import Login from './Login';
 import Signup from './Signup';
 import Profile from './Profile';
+import Nav from './Nav';
 import './App.css';
 
 // interfaces
@@ -57,8 +58,9 @@ const App: React.FC = () => {
   if (Object.keys(user).length > 0) {
     contents = (
       <>
-        <Profile libraryId={user.library} />
-        <p onClick={logout}>Log Out!</p>
+        <Nav logout={logout} />
+        <br />
+        <Route path='/' render={() => <Profile libraryId={user.library} />} />
       </>
     )
   } else {

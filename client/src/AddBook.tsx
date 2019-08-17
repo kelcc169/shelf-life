@@ -1,58 +1,69 @@
 import React, { useState } from 'react';
 import axios from 'axios';
-import { Link } from 'react-router-dom';
 
-import { ILibraryProps } from './interfaces';
+import { IAddBook } from './interfaces';
 
-const AddBook: React.FC<ILibraryProps> = ({libraryId}) => {
-  const [ title, setTitle ] = useState('')
-  const [ author, setAuthor ] = useState('')
-  const [ isbn, setIsbn ] = useState('')
+const AddBook: React.FC<IAddBook> = ({libraryId, setSelectedBook, setNewBook}) => {
+  const [ search, setSearch ] = useState<string>('')
+  const [ results, setResults ] = useState(null as any)
 
-  function handleTitleChange(e: React.ChangeEvent<HTMLInputElement>) {
-    setTitle(e.target.value)
+  function handleSearchChange(e: React.ChangeEvent<HTMLInputElement>) {
+    setSearch(e.target.value)
   }
 
-  function handleAuthorChange(e: React.ChangeEvent<HTMLInputElement>) {
-    setAuthor(e.target.value)
-  }
-
-  function handleIsbnChange(e: React.ChangeEvent<HTMLInputElement>) {
-    setIsbn(e.target.value)
-  }
-
-  function handleSubmit(e: React.FormEvent) {
+  function handleFormSubmit(e: React.FormEvent) {
     e.preventDefault()
+    axios.get(`http://openlibrary.org/search.json?title=${search}&limit=10`)
+      .then(res => {
+        setResults(res.data)
+      })
+  }
+
+  function saveBook(book: any) {
+    console.log('i want to save this book')
     axios.post(`/api/library/${libraryId}`, {
-      title: title,
-      author: author,
-      isbn: isbn
+      title: book.title_suggest,
+      author: book.author_name[0],
+      isbn: book.isbn[0]
     }).then(res => {
-      
-      console.log(res.data.results)
+      setSelectedBook(res.data)
+      setNewBook(res.data)
     })
   }
-  
+
+  var searchResults;
+  if (results !== null) {
+    searchResults = results.docs.map((book: any, index: number) => {
+      if (book.author_name) {
+        var author = book.author_name[0]
+      }
+      if (book.publish_date) {
+        var publication = book.publish_date[0]
+      }
+      return(
+      <div key={index} >
+        <p>{book.title_suggest}</p>
+        <p>{author}</p>
+        <p>{publication}</p>
+        <button onClick={() => saveBook(book)}>Save Book</button>
+      </div>
+      )
+    })
+  } else {
+    searchResults = <p>Enter Book Title</p>
+  }
+
   return(
     <div>
-      <form onSubmit={handleSubmit}>
+      <form onSubmit={handleFormSubmit}>
         <input type='text' 
-          name='title'
+          name='search'
           placeholder='Book Title'
-          onChange={handleTitleChange}
-          value={title} />
-        <input type='text' 
-          name='author'
-          placeholder='Author'
-          onChange={handleAuthorChange}
-          value={author} />
-        <input type='text' 
-          name='isbn'
-          placeholder='ISBN'
-          onChange={handleIsbnChange}
-          value={isbn} />
-        <Link to='/'><input type='submit' value='AddBook!' /></Link>
+          onChange={handleSearchChange}
+          value={search} />
+        <input type='submit' value='Search' />
       </form>
+      {searchResults}
     </div>
   )
 }

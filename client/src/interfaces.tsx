@@ -10,9 +10,16 @@ export interface ILibraryProps {
   books?: IBook[];
   setBooks?: Function;
 }
-export interface ISelectBook {
+
+export interface IAddBook {
+  libraryId?: string;
   setSelectedBook: Function;
+  setNewBook: Function;
+}
+
+export interface ISelectBook {
   books: IBook[];
+  setSelectedBook: Function;
 }
 
 export interface IBookProps {
@@ -21,6 +28,10 @@ export interface IBookProps {
 
 export interface IAuthor {
   name: string;
+}
+
+export interface INav {
+  logout: Function;
 }
 
 export interface IUser extends mongoose.Document {
