@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 import axios from 'axios';
 
 import Loan from './Loan';
@@ -35,7 +36,7 @@ const BookDetail: React.FC<IBookProps> = ({selectedBook, removeBook, libraryId})
         {authors}
         {image}
         <Loan selectedBookId={selectedBook._id} libraryId={libraryId} />
-        <button onClick={() => removeBook(selectedBook._id)} >Remove Book</button>
+        <Link to='/library' ><button onClick={() => removeBook(selectedBook._id)} >Remove Book</button></Link>
       </div>
     )
   } else {

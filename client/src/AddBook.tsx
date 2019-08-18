@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
 import axios from 'axios';
 
 import { IAddBook } from './interfaces';
@@ -49,7 +50,7 @@ const AddBook: React.FC<IAddBook> = ({libraryId, setSelectedBook, newStatus, set
         <p>{book.title_suggest}</p>
         <p>{author}</p>
         <p>{publication}</p>
-        <button onClick={() => saveBook(book)}>Save Book</button>
+        <Link to='/library' ><button onClick={() => saveBook(book)}>Save Book</button></Link>
       </div>
       )
     })

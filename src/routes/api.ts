@@ -4,6 +4,7 @@ const router = express.Router();
 // import User, { IUser } from '../models/user';
 import Book, { IBook } from '../models/book';
 import Library, { ILibrary } from '../models/library';
+import Loan, { ILoan } from '../models/loan';
 
 // GET /api/library/:id - get the books in the user's library
 router.get('/library/:id', (req, res) => {
@@ -52,7 +53,17 @@ router.post('/library/:id', (req, res) => {
 
 // POST /api/library/:id - post a loan to a library
 router.post('/library/:lid/:bid', (req, res) => {
-  
+  Loan.findOne({bookId: req.params.bid, libraryId: req.params.lid}, (err, loan: ILoan) => {
+    if (err) res.json(err)
+    if (!loan) {
+      Loan.create({
+        bookId: req.params.bid,
+        libraryId: req.params.lid,
+        currentStatus: true,
+        loan: []
+      })
+    }
+  })
 })
 
 // DELETE /api/library/:id - delete a book from a library!
