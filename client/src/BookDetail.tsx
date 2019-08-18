@@ -1,9 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 
+import Loan from './Loan';
+
 import { IBookProps } from './interfaces';
 
-const BookDetail: React.FC<IBookProps> = ({selectedBook, removeBook}) => {
+const BookDetail: React.FC<IBookProps> = ({selectedBook, removeBook, libraryId}) => {
   const [ details, setDetails ] = useState()
 
   // when selected book changes, make a new api call
@@ -32,6 +34,7 @@ const BookDetail: React.FC<IBookProps> = ({selectedBook, removeBook}) => {
         <h2>{details.title}</h2>
         {authors}
         {image}
+        <Loan selectedBookId={selectedBook._id} libraryId={libraryId} />
         <button onClick={() => removeBook(selectedBook._id)} >Remove Book</button>
       </div>
     )

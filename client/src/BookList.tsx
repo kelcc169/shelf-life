@@ -15,7 +15,16 @@ const BookList: React.FC<ISelectBook> = ({books, setSelectedBook}) => {
     })
 
     const filteredList = bookFilter.map((book: IBook, index: number) => {
-      return <Link to={`/books/${book.isbn}`} key={index}><button onClick={() =>setSelectedBook(book)}>{book.title}</button></Link>
+      return (
+      <div className="card" onClick={() =>setSelectedBook(book)}>
+          <Link to={`/books/${book.isbn}`} key={index}>
+          <div className="card-body">
+            <h5 className="card-title">{book.title}</h5>
+            <h6 className="card-subtitle mb-2 text-muted">{book.author}</h6>
+          </div>
+            </Link>
+      </div>
+      )
     })
     return(
       <>

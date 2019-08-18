@@ -50,6 +50,11 @@ router.post('/library/:id', (req, res) => {
   })
 })
 
+// POST /api/library/:id - post a loan to a library
+router.post('/library/:lid/:bid', (req, res) => {
+  
+})
+
 // DELETE /api/library/:id - delete a book from a library!
 router.delete('/library/:lid/:bid', (req, res) => {
   console.log('i\'m gonna delete this:', req.params.bid)

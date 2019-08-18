@@ -1,5 +1,6 @@
 import mongoose from 'mongoose';
 import { IAuthenticated } from '../../src/models/user';
+import { LibraryCard } from '../../src/models/loan';
 
 export interface ISetTokens {
   setToken: Function;
@@ -29,8 +30,14 @@ export interface ISelectBook {
 }
 
 export interface IBookProps {
+  libraryId: string;
   selectedBook: IBook;
   removeBook: Function;
+}
+
+export interface ILoanProps {
+  selectedBookId: string;
+  libraryId: string;
 }
 
 export interface INav {
@@ -57,4 +64,11 @@ export interface IBook extends mongoose.Document{
   title: string;
   author: string;
   isbn: string;
+}
+
+export interface ILoan extends mongoose.Document {
+  bookId: string;
+  libraryId: string;
+  currentStatus: boolean;
+  loans: LibraryCard;
 }
