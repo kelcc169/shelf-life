@@ -7,10 +7,12 @@ const AddBook: React.FC<IAddBook> = ({libraryId, setSelectedBook, newStatus, set
   const [ search, setSearch ] = useState<string>('')
   const [ results, setResults ] = useState(null as any)
 
+  // set title search parameters
   function handleSearchChange(e: React.ChangeEvent<HTMLInputElement>) {
     setSearch(e.target.value)
   }
 
+  // call api for book options
   function handleFormSubmit(e: React.FormEvent) {
     e.preventDefault()
     axios.get(`http://openlibrary.org/search.json?title=${search}&limit=10`)
@@ -19,31 +21,29 @@ const AddBook: React.FC<IAddBook> = ({libraryId, setSelectedBook, newStatus, set
       })
   }
 
+  // save the selected book to user's library
   function saveBook(book: any) {
-    console.log('i want to save this book')
     axios.post(`/api/library/${libraryId}`, {
       title: book.title_suggest,
       author: book.author_name[0],
       isbn: book.isbn[0]
     }).then(res => {
       setSelectedBook(res.data)
-      if (newStatus) {
-        setNewStatus(false) 
-      } else {
-        setNewStatus(true)
-      }
+      setNewStatus(newStatus ? false : true)
     })
   }
 
-  var searchResults;
   if (results !== null) {
+    var searchResults;
     searchResults = results.docs.map((book: any, index: number) => {
       if (book.author_name) {
         var author = book.author_name[0]
       }
+      
       if (book.publish_date) {
         var publication = book.publish_date[0]
       }
+      
       return(
       <div key={index} >
         <p>{book.title_suggest}</p>

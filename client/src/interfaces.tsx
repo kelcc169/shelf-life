@@ -11,16 +11,16 @@ export interface IFilter {
 }
 
 export interface ILibraryProps {
-  libraryId?: string;
+  libraryId: string;
   books?: IBook[];
   setBooks?: Function;
 }
 
 export interface IAddBook {
-  libraryId?: string;
+  libraryId: string;
+  newStatus: boolean;
   setSelectedBook: Function;
   setNewStatus: Function;
-  newStatus: boolean;
 }
 
 export interface ISelectBook {

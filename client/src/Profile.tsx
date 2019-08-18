@@ -15,19 +15,14 @@ const Profile: React.FC<ILibraryProps> = ({libraryId}) => {
   const [ selectedBook, setSelectedBook ] = useState<IBook>({} as IBook);
   const [ newStatus, setNewStatus ] = useState<boolean>(false);
 
+  // delete a book
   function removeBook(bookId: string) {
-    console.log('i want to remove this book', bookId)
     axios.delete(`/api/library/${libraryId}/${bookId}`)
-    if (newStatus) {
-      setNewStatus(false) 
-    } else {
-      setNewStatus(true)
-    }
+    setNewStatus(newStatus ? false : true)
   }
 
   // get all books associated with the user if the id changes or if a book is added
   useEffect(() =>{
-    console.log('books!')
     axios.get(`/api/library/${libraryId}`)
       .then(res => {
         setBooks(res.data.books)

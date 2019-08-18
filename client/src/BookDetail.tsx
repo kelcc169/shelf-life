@@ -6,6 +6,7 @@ import { IBookProps } from './interfaces';
 const BookDetail: React.FC<IBookProps> = ({selectedBook, removeBook}) => {
   const [ details, setDetails ] = useState()
 
+  // when selected book changes, make a new api call
   useEffect(() => {
     const search = 'ISBN:' + selectedBook.isbn
     axios.get(`https://openlibrary.org/api/books?bibkeys=${search}&jscmd=data&format=json`)
