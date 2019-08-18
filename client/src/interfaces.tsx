@@ -5,6 +5,11 @@ export interface ISetTokens {
   setToken: Function;
 }
 
+export interface IFilter {
+  setFilter: Function;
+  filter: string;
+}
+
 export interface ILibraryProps {
   libraryId?: string;
   books?: IBook[];

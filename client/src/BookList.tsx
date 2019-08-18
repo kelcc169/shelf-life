@@ -1,25 +1,27 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
+
+import SearchFilter from './SearchFilter';
 
 import { IBook, ISelectBook } from './interfaces';
 
 const BookList: React.FC<ISelectBook> = ({books, setSelectedBook}) => {
-  if (books.length > 0) {
-    const bookList = books
-    //   var titleA = a.title.toUpperCase(); // ignore upper and lowercase
-    //   var titleB = b.title.toUpperCase(); // ignore upper and lowercase
-    //   if (titleA < titleB) {
-    //     return -1;
-    //   }
-    //   if (titleA > titleB) {
-    //     return 1;
-    //   }
-    //   return 0;
-    .map((book: IBook, index: number) => {
+  const [ filter, setFilter ] = useState<string>('')
+
+  if (books.length > 0) {    
+    const bookFilter = Array.from(books).filter(book => {
+      var bookString = JSON.stringify(book)
+      return bookString.toLowerCase().includes(filter.toLowerCase())
+    })
+
+    const filteredList = bookFilter.map((book: IBook, index: number) => {
       return <Link to={`/books/${book.isbn}`} key={index}><button onClick={() =>setSelectedBook(book)}>{book.title}</button></Link>
     })
     return(
-      <>{bookList}</>
+      <>
+        <SearchFilter setFilter={setFilter} filter={filter} />
+        {filteredList}
+      </>
       )
   } else {
     return(<p>No Books In Your Library!</p>)
@@ -27,3 +29,15 @@ const BookList: React.FC<ISelectBook> = ({books, setSelectedBook}) => {
 }
 
 export default BookList;
+
+    // .sort(function(a: IBook, b: IBook) {
+    //     var titleA = a.title.toUpperCase(); // ignore upper and lowercase
+    //     var titleB = b.title.toUpperCase(); // ignore upper and lowercase
+    //     if (titleA < titleB) {
+    //       return -1;
+    //     }
+    //     if (titleA > titleB) {
+    //       return 1;
+    //     }
+    //     return 0;
+    // })
