@@ -3,7 +3,7 @@ import axios from 'axios';
 
 import { IAddBook } from './interfaces';
 
-const AddBook: React.FC<IAddBook> = ({libraryId, setSelectedBook, setNewBook}) => {
+const AddBook: React.FC<IAddBook> = ({libraryId, setSelectedBook, newStatus, setNewStatus}) => {
   const [ search, setSearch ] = useState<string>('')
   const [ results, setResults ] = useState(null as any)
 
@@ -27,7 +27,11 @@ const AddBook: React.FC<IAddBook> = ({libraryId, setSelectedBook, setNewBook}) =
       isbn: book.isbn[0]
     }).then(res => {
       setSelectedBook(res.data)
-      setNewBook(res.data)
+      if (newStatus) {
+        setNewStatus(false) 
+      } else {
+        setNewStatus(true)
+      }
     })
   }
 

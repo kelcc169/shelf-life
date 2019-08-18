@@ -50,6 +50,22 @@ router.post('/library/:id', (req, res) => {
   })
 })
 
+// DELETE /api/library/:id - delete a book from a library!
+router.delete('/library/:lid/:bid', (req, res) => {
+  console.log('i\'m gonna delete this:', req.params.bid)
+  Library.findById(req.params.lid, (err, library: ILibrary) => {
+    console.log('these are my books:', library.books)
+    let index = library.books.indexOf(req.params.bid)
+    console.log('that book is here', index)
+    library.books.splice(index, 1)
+    library.save()
+    console.log('i may have removed a book...')
+  })
+  
+  
+  res.json(req.params.lid)
+})
+
 router.get('/', (req, res) => {
   res.json({type: 'success', message: 'You accessed the protected api routes'})
 })

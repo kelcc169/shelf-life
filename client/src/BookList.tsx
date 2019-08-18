@@ -29,15 +29,3 @@ const BookList: React.FC<ISelectBook> = ({books, setSelectedBook}) => {
 }
 
 export default BookList;
-
-    // .sort(function(a: IBook, b: IBook) {
-    //     var titleA = a.title.toUpperCase(); // ignore upper and lowercase
-    //     var titleB = b.title.toUpperCase(); // ignore upper and lowercase
-    //     if (titleA < titleB) {
-    //       return -1;
-    //     }
-    //     if (titleA > titleB) {
-    //       return 1;
-    //     }
-    //     return 0;
-    // })

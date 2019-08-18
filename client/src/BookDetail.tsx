@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 
-import { IBookProps, IAuthor } from './interfaces';
+import { IBookProps } from './interfaces';
 
-const BookDetail: React.FC<IBookProps> = ({selectedBook}) => {
+const BookDetail: React.FC<IBookProps> = ({selectedBook, removeBook}) => {
   const [ details, setDetails ] = useState()
 
   useEffect(() => {
@@ -15,15 +15,23 @@ const BookDetail: React.FC<IBookProps> = ({selectedBook}) => {
   }, [selectedBook.isbn])
 
   if (details) {
-    const authors = details.authors.map((author: IAuthor, index: number) => {
+    const authors = details.authors.map((author: any, index: number) => {
       return <h4 key={index} >{author.name}</h4>
     })
+
+    var image;
+    if (details.cover) {
+      image = <img src={details.cover.medium} alt='book cover' />
+    } else {
+      image = <div>Cover Image Unavailable</div>
+    }
 
     return(
       <div>
         <h2>{details.title}</h2>
         {authors}
-        <img src={details.cover.medium} alt='book cover' />
+        {image}
+        <button onClick={() => removeBook(selectedBook._id)} >Remove Book</button>
       </div>
     )
   } else {

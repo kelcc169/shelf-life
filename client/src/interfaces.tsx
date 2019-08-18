@@ -19,7 +19,8 @@ export interface ILibraryProps {
 export interface IAddBook {
   libraryId?: string;
   setSelectedBook: Function;
-  setNewBook: Function;
+  setNewStatus: Function;
+  newStatus: boolean;
 }
 
 export interface ISelectBook {
@@ -29,10 +30,7 @@ export interface ISelectBook {
 
 export interface IBookProps {
   selectedBook: IBook;
-}
-
-export interface IAuthor {
-  name: string;
+  removeBook: Function;
 }
 
 export interface INav {
