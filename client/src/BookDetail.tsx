@@ -44,7 +44,7 @@ const BookDetail: React.FC<IBookProps> = ({selectedBook, removeBook, libraryId})
             <Loan selectedBookId={selectedBook._id} libraryId={libraryId} />
           </Tab>
           <Tab eventKey="notes" title="Notes">
-            <BookNotes />
+            <BookNotes selectedBookId={selectedBook._id} libraryId={libraryId} />
           </Tab>
         </Tabs>
       </div>

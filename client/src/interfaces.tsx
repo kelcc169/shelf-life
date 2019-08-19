@@ -35,13 +35,18 @@ export interface IBookProps {
   removeBook: Function;
 }
 
-export interface ILoanProps {
+export interface IIdProps {
   selectedBookId: string;
   libraryId: string;
 }
 
 export interface INav {
   logout: Function;
+}
+
+export interface SingleNote {
+  date: string;
+  content: string;
 }
 
 export interface IUser extends mongoose.Document {
@@ -71,4 +76,11 @@ export interface ILoan extends mongoose.Document {
   libraryId: string;
   currentStatus: boolean;
   loans: LibraryCard[];
+}
+
+
+export interface INotes extends mongoose.Document {
+  bookId: string;
+  libraryId: string;
+  notes: SingleNote[];
 }

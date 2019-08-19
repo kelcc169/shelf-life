@@ -4,6 +4,7 @@ const router = express.Router();
 import Book, { IBook } from '../models/book';
 import Library, { ILibrary } from '../models/library';
 import Loan, { ILoan } from '../models/loan';
+import Notes, { INotes } from '../models/notes';
 
 // GET /api/library/:id - get the books in the user's library
 router.get('/library/:id', (req, res) => {
@@ -21,11 +22,41 @@ router.get('/books', (req, res) => {
   })
 })
 
-// GET /api/books/:bid/:lib - get loan associated with a book
+// GET /api/library/:lid/:bid - get loan associated with a book
 router.get('/library/:lid/:bid', (req, res) => {
   Loan.findOne({libraryId: req.params.lid, bookId: req.params.bid}, (err, loan: ILoan) => {
     if (err) res.json(err)
     res.json(loan)
+  })
+})
+
+// GET /api/library/:lid/:bid/notes - get notes for a book
+router.get('/library/:lib/:bid/notes', (req, res) => {
+  Notes.findOne({libraryId: req.params.lid, bookId: req.params.bid}, (err, notes: INotes) => {
+    if (err) res.json(err)
+    res.json(notes)
+  })
+})
+
+// POST /api/library/notes - post a note to a book
+router.post('/library/notes', (req, res) => {
+  Notes.findOne({libraryId: req.body.libraryId, bookId: req.body.bookId}, (err, notes: INotes) => {
+    if (err) res.json(err)
+    if (!notes) {
+      Notes.create({
+        libraryId: req.body.libraryId,
+        bookId: req.body.bookId,
+      }, (err, notes: INotes) => {
+        if (err) res.json(err)
+        notes.notes.push({date: req.body.date, content: req.body.content})
+        notes.save()
+        res.json(notes)
+      })
+    } else {
+      notes.notes.push({date: req.body.date, content: req.body.content})
+      notes.save()
+      res.json(notes)
+    }
   })
 })
 
@@ -58,7 +89,7 @@ router.post('/library/:id', (req, res) => {
   })
 })
 
-// POST /api/library/:id - post a loan to a library
+// POST /api/library/:id/:bid - post a loan to a library
 router.post('/library/:lid/:bid', (req, res) => {
   console.log('here i am')
   Loan.findOne({bookId: req.params.bid, libraryId: req.params.lid}, (err, loan: ILoan) => {
@@ -85,6 +116,7 @@ router.post('/library/:lid/:bid', (req, res) => {
   })
 })
 
+// PUT /api/library/:id - check in a book that's checked out
 router.put('/library/:id', (req, res) => {
   Loan.findById(req.params.id, (err, loan: ILoan) => {
     if (err) res.json(err)

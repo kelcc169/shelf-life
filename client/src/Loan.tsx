@@ -2,9 +2,9 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import moment from 'moment';
 
-import { ILoanProps, ILoan } from './interfaces';
+import { IIdProps, ILoan } from './interfaces';
 
-const Loan: React.FC<ILoanProps> = ({selectedBookId, libraryId}) => {
+const Loan: React.FC<IIdProps> = ({selectedBookId, libraryId}) => {
   const [ loan, setLoan ] = useState<ILoan>({} as ILoan);
   const [ name, setName ] = useState<string>('');
 
@@ -12,6 +12,7 @@ const Loan: React.FC<ILoanProps> = ({selectedBookId, libraryId}) => {
     setName(e.target.value)
   }
 
+  // !!!!! fix me!!!!!!
   function loanBook() {
     axios.post(`/api/library/${libraryId}/${selectedBookId}`, {
       date: moment().format('MM-DD-YYYY'),
@@ -37,6 +38,7 @@ const Loan: React.FC<ILoanProps> = ({selectedBookId, libraryId}) => {
       })
   }, [libraryId, selectedBookId])
 
+  // past loans
   var loanHistory;
   if (loan !== null && Object.keys(loan).length > 0) {
     loanHistory = loan.loans.map((entry, index ) => {
@@ -46,6 +48,7 @@ const Loan: React.FC<ILoanProps> = ({selectedBookId, libraryId}) => {
     loanHistory = <p></p>
   }
 
+  // based on current status, what can you do
   var loanOptions;
   if (loan !== null && loan.currentStatus === true) {
     loanOptions = 

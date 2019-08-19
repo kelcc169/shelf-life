@@ -1,6 +1,6 @@
-import mongoose, { Schema } from 'mongoose';
+import mongoose from 'mongoose';
 
-const loanSchema = new Schema({
+const loanSchema = new mongoose.Schema({
   bookId: {type: mongoose.Schema.Types.ObjectId, ref: 'Book'},
   libraryId: {type: mongoose.Schema.Types.ObjectId, ref: 'Library'},
   currentStatus: Boolean,
