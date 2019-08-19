@@ -21,7 +21,7 @@ const Profile: React.FC<ILibraryProps> = ({libraryId}) => {
     setNewStatus(newStatus ? false : true)
   }
 
-  // get all books associated with the user if the id changes or if a book is added
+  // get all books associated with the user if the id changes or if a book is added or removed
   useEffect(() =>{
     axios.get(`/api/library/${libraryId}`)
       .then(res => {
