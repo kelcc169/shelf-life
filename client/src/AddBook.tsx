@@ -24,7 +24,8 @@ const AddBook: React.FC<IAddBook> = ({libraryId, setSelectedBook, newStatus, set
 
   // save the selected book to user's library
   function saveBook(book: any) {
-    axios.post(`/api/library/${libraryId}`, {
+    axios.post(`/api/library/book`, {
+      libraryId: libraryId,
       title: book.title_suggest,
       author: book.author_name[0],
       isbn: book.isbn[0]

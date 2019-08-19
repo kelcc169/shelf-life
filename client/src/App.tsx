@@ -69,8 +69,8 @@ const App: React.FC = () => {
         <p>Please Log In or Sign Up</p>
         <Link to='/login' >Login</Link>
         <Link to='/signup' >Sign Up</Link>
-        <Route path='/login' render={() => <Login setToken={setToken} /> } />
-        <Route path='/signup' render={() => <Signup setToken={setToken}  /> } />        
+        <Route path='/login' render={(props) => <Login setToken={setToken} {...props} /> } />
+        <Route path='/signup' render={(props) => <Signup setToken={setToken} {...props} /> } />        
       </>
     )
   }

@@ -52,8 +52,8 @@ router.post('/library/notes', (req, res) => {
   })
 })
 
-// POST /api/library/:id - post a book to a library!
-router.post('/library/:id', (req, res) => {
+// POST /api/library/book - post a book to a library!
+router.post('/library/book', (req, res) => {
   Book.findOne({isbn: req.body.isbn}, (err, book: IBook) => {
     if (err) res.json(err)
     if (!book) {
@@ -63,15 +63,15 @@ router.post('/library/:id', (req, res) => {
         isbn: req.body.isbn,
       }, (err, book: IBook) => {
         if (err) res.json(err)
-        Library.findById(req.params.id, (err, library: ILibrary) => {
+        Library.findById(req.body.libraryId, (err, library: ILibrary) => {
           if (err) res.json(err)
           library.books.push(book._id)
           library.save()
-          res.json(book)
+          res.json(library)
         })
       })
     } else {
-      Library.findById(req.params.id, (err, library: ILibrary) => {
+      Library.findById(req.body.libraryId, (err, library: ILibrary) => {
         if (err) res.json(err)
         library.books.push(book._id)
         library.save()
@@ -81,12 +81,10 @@ router.post('/library/:id', (req, res) => {
   })
 })
 
-// POST /api/library/:id/:bid - post a loan to a library
-router.post('/library/:lid/:bid', (req, res) => {
-  console.log('here i am')
-  Loan.findOne({bookId: req.params.bid, libraryId: req.params.lid}, (err, loan: ILoan) => {
+// POST /api/library/loan - post a loan to a library
+router.post('/library/loan', (req, res) => {
+  Loan.findOne({bookId: req.body.bookId, libraryId: req.body.libraryId}, (err, loan: ILoan) => {
     if (err) res.json(err)
-    // if loan doesn't exist, make a new one
     if (!loan) {
       Loan.create({
         bookId: req.params.bid,
@@ -94,11 +92,11 @@ router.post('/library/:lid/:bid', (req, res) => {
         currentStatus: true,
         loan: []
       }, (err, loan: ILoan) => {
+        if (err) res.json(err)
         loan.loans.push({date: req.body.date, name: req.body.name})
         loan.save()
         res.json(loan)
       })
-    // if loan exists, push new loan into loan array  
     } else {
       loan.loans.push({date: req.body.date, name: req.body.name})
       loan.currentStatus = true
@@ -120,18 +118,12 @@ router.put('/library/:id', (req, res) => {
 
 // DELETE /api/library/:id - delete a book from a library!
 router.delete('/library/:lid/:bid', (req, res) => {
-  console.log('i\'m gonna delete this:', req.params.bid)
   Library.findById(req.params.lid, (err, library: ILibrary) => {
-    console.log('these are my books:', library.books)
     let index = library.books.indexOf(req.params.bid)
-    console.log('that book is here', index)
     library.books.splice(index, 1)
     library.save()
-    console.log('i may have removed a book...')
+    res.json(library)
   })
-  
-  
-  res.json(req.params.lid)
 })
 
 router.get('/', (req, res) => {

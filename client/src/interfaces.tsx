@@ -1,9 +1,11 @@
 import mongoose from 'mongoose';
+import { RouteComponentProps } from 'react-router-dom';
 import { IAuthenticated } from '../../src/models/user';
 import { LibraryCard } from '../../src/models/loan';
 
-export interface ISetTokens {
+export interface ISetTokens extends RouteComponentProps {
   setToken: Function;
+  // history: History;
 }
 
 export interface IFilter {

@@ -3,7 +3,7 @@ import axios from 'axios';
 
 import { ISetTokens } from './interfaces';
 
-const Signup: React.FC<ISetTokens> = ({setToken}) => {
+const Signup: React.FC<ISetTokens> = ({setToken, history}) => {
   const [ name, setName ] = useState<string>('');
   const [ email, setEmail ] = useState<string>('');
   const [ password, setPassword ] = useState<string>('');
@@ -41,6 +41,8 @@ const Signup: React.FC<ISetTokens> = ({setToken}) => {
       }
     }).catch(err => {
       setMessage('Maximum accounts exceeded. Please try again later')
+    }).finally(() => {
+      history.push('/library')
     })
   }
 

@@ -8,7 +8,7 @@ const Nav: React.FC<INav> = ({logout}) => {
     <div>
       <Link to='/library' ><button>Library</button></Link>
       <Link to='/library/add' ><button>Add A Book</button></Link>
-      <button onClick={(e) => logout(e)}>Logout</button>
+      <Link to='/' ><button onClick={(e) => logout(e)}>Logout</button></Link>
     </div>
   )
 }

@@ -12,9 +12,10 @@ const Loan: React.FC<IIdProps> = ({selectedBookId, libraryId}) => {
     setName(e.target.value)
   }
 
-  // !!!!! fix me!!!!!!
   function loanBook() {
-    axios.post(`/api/library/${libraryId}/${selectedBookId}`, {
+    axios.post(`/api/library/loan/`, {
+      libraryId: libraryId,
+      bookId: selectedBookId,
       date: moment().format('MM-DD-YYYY'),
       name: name
     }).then(res => {
