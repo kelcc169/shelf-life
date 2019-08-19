@@ -70,5 +70,5 @@ export interface ILoan extends mongoose.Document {
   bookId: string;
   libraryId: string;
   currentStatus: boolean;
-  loans: LibraryCard;
+  loans: LibraryCard[];
 }

@@ -26,6 +26,7 @@ const Loan: React.FC<ILoanProps> = ({selectedBookId, libraryId}) => {
       currentStatus: false
     }).then(res => {
       setLoan(res.data)
+      setName('')
     })
   }
 
@@ -34,21 +35,37 @@ const Loan: React.FC<ILoanProps> = ({selectedBookId, libraryId}) => {
       .then(res => {
         setLoan(res.data)
       })
-  }, [libraryId, selectedBookId, loan.currentStatus])
-  
+  }, [libraryId, selectedBookId])
 
-  if (loan.currentStatus) {
-    return(<p onClick={checkInBook} >Check In</p>)
+  var loanHistory;
+  if (loan !== null && Object.keys(loan).length > 0) {
+    loanHistory = loan.loans.map((entry, index ) => {
+      return <p key={index} >{entry.date} - {entry.name}</p>
+    })
   } else {
-    return(
-      <div>
-        <p onClick={loanBook} >Loan</p>
-        <input type='text' name='name' placeholder='Loaned to...' value={name} onChange={handleNameChange} />
-      </div>
-    )
+    loanHistory = <p></p>
   }
 
+  var loanOptions;
+  if (loan !== null && loan.currentStatus === true) {
+    loanOptions = 
+    <div>
+      <p onClick={checkInBook} >Check In</p>
+    </div>
+  } else {
+    loanOptions = 
+      <div>
+        <p onClick={loanBook} >Loan</p>
+        <input type='text' name='name' placeholder='Loan book to...' value={name} onChange={handleNameChange} />
+      </div>
+  }
 
+  return(
+      <div>
+        {loanOptions}
+        {loanHistory}
+      </div>
+    )
 }
 
 export default Loan;

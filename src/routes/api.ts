@@ -1,7 +1,6 @@
 import express from 'express';
 const router = express.Router();
 
-// import User, { IUser } from '../models/user';
 import Book, { IBook } from '../models/book';
 import Library, { ILibrary } from '../models/library';
 import Loan, { ILoan } from '../models/loan';
@@ -24,7 +23,6 @@ router.get('/books', (req, res) => {
 
 // GET /api/books/:bid/:lib - get loan associated with a book
 router.get('/library/:lid/:bid', (req, res) => {
-  console.log('boop!')
   Loan.findOne({libraryId: req.params.lid, bookId: req.params.bid}, (err, loan: ILoan) => {
     if (err) res.json(err)
     res.json(loan)
@@ -73,14 +71,12 @@ router.post('/library/:lid/:bid', (req, res) => {
         currentStatus: true,
         loan: []
       }, (err, loan: ILoan) => {
-        console.log('no loans found here yet! so I made one!', loan)
         loan.loans.push({date: req.body.date, name: req.body.name})
         loan.save()
         res.json(loan)
       })
     // if loan exists, push new loan into loan array  
     } else {
-      console.log('i found one!', loan)
       loan.loans.push({date: req.body.date, name: req.body.name})
       loan.currentStatus = true
       loan.save()
@@ -90,12 +86,10 @@ router.post('/library/:lid/:bid', (req, res) => {
 })
 
 router.put('/library/:id', (req, res) => {
-  console.log('hallo')
   Loan.findById(req.params.id, (err, loan: ILoan) => {
     if (err) res.json(err)
     loan.currentStatus = req.body.currentStatus
     loan.save()
-    console.log(loan.currentStatus)
     res.json(loan)
   })
 })
