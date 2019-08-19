@@ -5,7 +5,6 @@ import { LibraryCard } from '../../src/models/loan';
 
 export interface ISetTokens extends RouteComponentProps {
   setToken: Function;
-  // history: History;
 }
 
 export interface IFilter {

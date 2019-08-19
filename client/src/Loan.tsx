@@ -12,15 +12,16 @@ const Loan: React.FC<IIdProps> = ({selectedBookId, libraryId}) => {
     setName(e.target.value)
   }
 
-  function loanBook() {
+  function loanBook(e: React.FormEvent) {
+    e.preventDefault();
     axios.post(`/api/library/loan/`, {
       libraryId: libraryId,
       bookId: selectedBookId,
       date: moment().format('MM-DD-YYYY'),
       name: name
     }).then(res => {
-        setLoan(res.data)
-      })
+      setLoan(res.data)
+    })
   }
 
   function checkInBook() {
@@ -54,13 +55,15 @@ const Loan: React.FC<IIdProps> = ({selectedBookId, libraryId}) => {
   if (loan !== null && loan.currentStatus === true) {
     loanOptions = 
     <div>
-      <p onClick={checkInBook} >Check In</p>
+      <button onClick={checkInBook} >Check In</button>
     </div>
   } else {
     loanOptions = 
       <div>
-        <p onClick={loanBook} >Loan</p>
-        <input type='text' name='name' placeholder='Loan book to...' value={name} onChange={handleNameChange} />
+        <form onSubmit={loanBook} >
+          <input type='text' name='name' placeholder='Loan book to...' value={name} onChange={handleNameChange} />
+          <input type='submit' value='Loan Book' />
+        </form>
       </div>
   }
 

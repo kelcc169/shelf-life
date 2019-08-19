@@ -1,22 +1,39 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
+import Tabs from 'react-bootstrap/Tabs';
+import Tab from 'react-bootstrap/Tab';
 
 import { IAddBook } from './interfaces';
 
 const AddBook: React.FC<IAddBook> = ({libraryId, setSelectedBook, newStatus, setNewStatus}) => {
-  const [ search, setSearch ] = useState<string>('')
+  const [ searchTitle, setSearchTitle ] = useState<string>('')
+  const [ searchIsbn, setSearchIsbn] = useState<string>('')
   const [ results, setResults ] = useState(null as any)
 
   // set title search parameters
-  function handleSearchChange(e: React.ChangeEvent<HTMLInputElement>) {
-    setSearch(e.target.value)
+  function handleTitleChange(e: React.ChangeEvent<HTMLInputElement>) {
+    setSearchTitle(e.target.value)
   }
 
-  // call api for book options
-  function handleFormSubmit(e: React.FormEvent) {
+  // set isbn search parameters
+  function handleIsbnChange(e: React.ChangeEvent<HTMLInputElement>) {
+    setSearchIsbn(e.target.value)
+  }
+
+  // call api for book options - title
+  function handleTitleSubmit(e: React.FormEvent) {
     e.preventDefault()
-    axios.get(`http://openlibrary.org/search.json?title=${search}&limit=10`)
+    axios.get(`http://openlibrary.org/search.json?title=${searchTitle}&limit=20`)
+      .then(res => {
+        setResults(res.data)
+      })
+  }
+
+  // call api for book - isbn
+  function handleIsbnSubmit(e: React.FormEvent) {
+    e.preventDefault()
+    axios.get(`http://openlibrary.org/search.json?isbn=${searchIsbn}&limit=20`)
       .then(res => {
         setResults(res.data)
       })
@@ -56,21 +73,34 @@ const AddBook: React.FC<IAddBook> = ({libraryId, setSelectedBook, newStatus, set
       )
     })
   } else {
-    searchResults = <p>Enter Book Title</p>
+    searchResults = <p></p>
   }
 
   return(
+    // <div>
     <div>
-      <form onSubmit={handleFormSubmit}>
-        <input type='text' 
-          name='search'
-          placeholder='Book Title'
-          onChange={handleSearchChange}
-          value={search} />
-        <input type='submit' value='Search' />
-      </form>
-      {searchResults}
-    </div>
+    {/* <h5>Search for Books</h5> */}
+    <Tabs defaultActiveKey="title" id="uncontrolled-tab-example">
+      <Tab eventKey="title" title="Search Titles">
+        <div>
+          <form onSubmit={handleTitleSubmit} >
+            <input type='text' name='title' placeholder='Book Title' value={searchTitle} onChange={handleTitleChange} />
+            <input type='submit' value='Search' />
+          </form>
+        </div>
+        {searchResults}
+      </Tab>
+      <Tab eventKey="isbn" title="Search ISBN">
+        <div>
+          <form onSubmit={handleIsbnSubmit} >
+            <input type='text' name='isbn' placeholder='Book ISBN' value={searchIsbn} onChange={handleIsbnChange} />
+            <input type='submit' value='Search' />
+          </form>
+        </div>
+        {searchResults}
+      </Tab>
+    </Tabs>
+  </div>
   )
 }
 
