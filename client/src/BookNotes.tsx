@@ -2,53 +2,53 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import moment from 'moment';
 
-import { INotes, IIdProps, SingleNote } from './interfaces';
+import { INote, IIdProps, SingleNote } from './interfaces';
 
 const BookNotes: React.FC<IIdProps> = ({selectedBookId, libraryId}) => {
-  const [ notes, setNotes ] = useState<INotes>({} as INotes)
+  const [ note, setNote ] = useState<INote>({} as INote)
   const [ content, setContent ] = useState<string>('')
 
   function handleContentChange(e: React.ChangeEvent<HTMLInputElement>) {
     setContent(e.target.value)
   }
 
-  function saveNote() {
-    axios.post(`/api/notes`, {
+  function saveNote(e: React.FormEvent<HTMLFormElement>) {
+    e.preventDefault();
+    axios.post(`/api/library/notes`, {
       bookId: selectedBookId,
       libraryId: libraryId,
       date: moment().format('MM-DD-YYYY'),
       content: content
+    }).then(res => {
+      setNote(res.data)
+      setContent('')
     })
   }
 
   useEffect(() => {
-    console.log('i\'m off to find some notes')
-    axios.get(`/api/library/${libraryId}/${selectedBookId}/notes`)
+    axios.get(`/api/library/notes/${libraryId}/${selectedBookId}`)
       .then(res => {
-        console.log(res.data)
-        setNotes(res.data)
+        setNote(res.data)
       })
-  }, [selectedBookId, libraryId])
+  }, [libraryId, selectedBookId])
 
   var noteContent;
-  if (notes !== null && Object.keys(notes).length > 0) {
-    noteContent = notes.notes.map((note: SingleNote, index: number) => {
-      return(
-        <div>
-          <p>{note.date}</p>
-          <p>{note.content}</p>
-        </div>
-      )
+  if (note !== null && Object.keys(note).length > 0) {
+    noteContent = note.notes.map((note: SingleNote, index: number) => {
+      return <p key={index} > {note.date} - {note.content}</p>
     })
   } else {
     noteContent = <p>No Notes Yet!</p>
   }
 
   return(
-    <>
-      <p>I will have notes someday!</p>
+    <div>
+      <form onSubmit={saveNote}>
+        <input type='text' name='content' placeholder='Add A Note...' value={content} onChange={handleContentChange} />
+        <input type='submit' value='Add' />
+      </form>
       {noteContent}
-    </>
+    </div>
   )
 }
 

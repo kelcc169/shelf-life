@@ -79,7 +79,7 @@ export interface ILoan extends mongoose.Document {
 }
 
 
-export interface INotes extends mongoose.Document {
+export interface INote extends mongoose.Document {
   bookId: string;
   libraryId: string;
   notes: SingleNote[];

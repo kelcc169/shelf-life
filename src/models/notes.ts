@@ -1,6 +1,6 @@
 import mongoose from 'mongoose';
 
-const notesSchema = new mongoose.Schema({
+const noteSchema = new mongoose.Schema({
   bookId: {type: mongoose.Schema.Types.ObjectId, ref: 'Book'},
   libraryId: {type: mongoose.Schema.Types.ObjectId, ref: 'Library'},
   notes: [{
@@ -14,10 +14,10 @@ export interface SingleNote {
   content: string;
 }
 
-export interface INotes extends mongoose.Document {
+export interface INote extends mongoose.Document {
   bookId: string;
   libraryId: string;
   notes: SingleNote[];
 }
 
-export default mongoose.model('Notes', notesSchema);
+export default mongoose.model('Note', noteSchema);

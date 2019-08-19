@@ -4,21 +4,13 @@ const router = express.Router();
 import Book, { IBook } from '../models/book';
 import Library, { ILibrary } from '../models/library';
 import Loan, { ILoan } from '../models/loan';
-import Notes, { INotes } from '../models/notes';
+import Note, { INote } from '../models/notes';
 
 // GET /api/library/:id - get the books in the user's library
 router.get('/library/:id', (req, res) => {
   Library.findById(req.params.id).populate('books').exec((err, library: ILibrary) => {
     if (err) res.json(err)
     res.json(library)
-  })
-})
-
-// GET /api/books - get alllll the books (temporary)
-router.get('/books', (req, res) => {
-  Book.find({}, (err, books) => {
-    if (err) res.json(err)
-    res.json(books)
   })
 })
 
@@ -31,8 +23,8 @@ router.get('/library/:lid/:bid', (req, res) => {
 })
 
 // GET /api/library/:lid/:bid/notes - get notes for a book
-router.get('/library/:lib/:bid/notes', (req, res) => {
-  Notes.findOne({libraryId: req.params.lid, bookId: req.params.bid}, (err, notes: INotes) => {
+router.get('/library/notes/:lid/:bid', (req, res) => {
+  Note.findOne({libraryId: req.params.lid, bookId: req.params.bid}, (err, notes: INote) => {
     if (err) res.json(err)
     res.json(notes)
   })
@@ -40,13 +32,13 @@ router.get('/library/:lib/:bid/notes', (req, res) => {
 
 // POST /api/library/notes - post a note to a book
 router.post('/library/notes', (req, res) => {
-  Notes.findOne({libraryId: req.body.libraryId, bookId: req.body.bookId}, (err, notes: INotes) => {
+  Note.findOne({libraryId: req.body.libraryId, bookId: req.body.bookId}, (err, notes: INote) => {
     if (err) res.json(err)
     if (!notes) {
-      Notes.create({
+      Note.create({
         libraryId: req.body.libraryId,
         bookId: req.body.bookId,
-      }, (err, notes: INotes) => {
+      }, (err, notes: INote) => {
         if (err) res.json(err)
         notes.notes.push({date: req.body.date, content: req.body.content})
         notes.save()
