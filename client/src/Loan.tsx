@@ -1,15 +1,21 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import moment from 'moment';
 
 import { ILoanProps, ILoan } from './interfaces';
 
 const Loan: React.FC<ILoanProps> = ({selectedBookId, libraryId}) => {
-  const [ loan, setLoan ] = useState<ILoan>({} as ILoan)
+  const [ loan, setLoan ] = useState<ILoan>({} as ILoan);
+  const [ name, setName ] = useState<string>('');
+
+  function handleNameChange(e: React.ChangeEvent<HTMLInputElement>) {
+    setName(e.target.value)
+  }
 
   function loanBook() {
     axios.post(`/api/library/${libraryId}/${selectedBookId}`, {
-      date: '8/17/2019',
-      name: 'Nanners'
+      date: moment().format('MM-DD-YYYY'),
+      name: name
     }).then(res => {
         setLoan(res.data)
       })
@@ -34,7 +40,12 @@ const Loan: React.FC<ILoanProps> = ({selectedBookId, libraryId}) => {
   if (loan.currentStatus) {
     return(<p onClick={checkInBook} >Check In</p>)
   } else {
-    return(<p onClick={loanBook} >Loan</p>)
+    return(
+      <div>
+        <p onClick={loanBook} >Loan</p>
+        <input type='text' name='name' placeholder='Loaned to...' value={name} onChange={handleNameChange} />
+      </div>
+    )
   }
 
 
