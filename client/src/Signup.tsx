@@ -47,7 +47,7 @@ const Signup: React.FC<ISetTokens> = ({setToken, history}) => {
   }
 
   return(
-    <div className="Signup">
+    <div className="signup">
       <h3>Create a new account:</h3>
       <form onSubmit={handleSubmit}>
         <input type="text"
@@ -65,7 +65,7 @@ const Signup: React.FC<ISetTokens> = ({setToken, history}) => {
           placeholder="Enter your password..."
           onChange={handlePasswordChange}
           value={password} /><br />
-        <input type="submit" value="Sign Up!" />
+        <input className='btn btn-warning' type="submit" value="Sign Up!" />
       </form>
     </div>
   )

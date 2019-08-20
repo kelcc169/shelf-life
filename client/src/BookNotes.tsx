@@ -2,6 +2,8 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import moment from 'moment';
 
+import Table from 'react-bootstrap/Table';
+
 import { INote, IIdProps, SingleNote } from './interfaces';
 
 const BookNotes: React.FC<IIdProps> = ({selectedBookId, libraryId}) => {
@@ -35,7 +37,12 @@ const BookNotes: React.FC<IIdProps> = ({selectedBookId, libraryId}) => {
   var noteContent;
   if (note !== null && Object.keys(note).length > 0) {
     noteContent = note.notes.map((note: SingleNote, index: number) => {
-      return <p key={index} > {note.date} - {note.content}</p>
+      return(
+        <tr key={index}>
+          <td>{note.date}</td>
+          <td>{note.content}</td>
+        </tr>
+      )       
     })
   } else {
     noteContent = <p>No Notes Yet!</p>
@@ -45,9 +52,17 @@ const BookNotes: React.FC<IIdProps> = ({selectedBookId, libraryId}) => {
     <div>
       <form onSubmit={saveNote}>
         <input type='text' name='content' placeholder='Add A Note...' value={content} onChange={handleContentChange} />
-        <input type='submit' value='Add' />
+        <input className='btn btn-warning' type='submit' value='Add Notes' />
       </form>
-      {noteContent}
+      <Table>
+        <thead>
+          <th>Date</th>
+          <th>Note</th>
+        </thead>
+        <tbody>
+          {noteContent}
+        </tbody>
+      </Table>
     </div>
   )
 }

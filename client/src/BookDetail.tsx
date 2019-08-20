@@ -4,8 +4,10 @@ import Tabs from 'react-bootstrap/Tabs';
 import Tab from 'react-bootstrap/Tab';
 import axios from 'axios';
 
+import Button from 'react-bootstrap/Button';
+
 import Loan from './Loan';
-import BookNotes from './BookNotes'
+import BookNotes from './BookNotes';
 
 import { IBookProps } from './interfaces';
 
@@ -31,14 +33,14 @@ const BookDetail: React.FC<IBookProps> = ({selectedBook, removeBook, libraryId})
 
     return(
       <div>
-        <h3>{details.title}</h3>
+        <h3 style={{margin: '10px'}}>{details.title}</h3>
         <Tabs defaultActiveKey="details" id="uncontrolled-tab-example">
           <Tab eventKey="details" title="Details">
             <div style={{textAlign: 'center', padding: '25px'}}>
               <h5>Author - {selectedBook.author}</h5>
               {image}
               <br />
-              <Link to='/library' ><button onClick={() => removeBook(selectedBook._id)} >Remove Book</button></Link>
+              <Link to='/library' ><Button style={{ margin: '5px auto'}}variant='warning' onClick={() => removeBook(selectedBook._id)} >Remove Book</Button></Link>
             </div>
           </Tab>
           <Tab eventKey="loan" title="Loan Book">

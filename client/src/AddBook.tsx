@@ -68,12 +68,14 @@ const AddBook: React.FC<IAddBook> = ({libraryId, setSelectedBook, newStatus, set
       }
       
       return(
-        <Card key={index} style={{ minHeight: '200px', border: '3px solid #FFC107' }}>
-          <Card.Body style={{textAlign: 'center'}}>
-            <h5>{book.title_suggest}</h5>
-            <p>{author}</p>
-            <p>{publication}</p>
-            <Link to='/library' ><Button variant='warning' onClick={() => saveBook(book)}>Save Book</Button></Link>
+        <Card key={index} style={{ height: '200px', border: '3px solid #FFC107' }}>
+          <Card.Body style={{ textAlign: 'center', height: '100%' }}>
+            <Card.Text style={{height: '110px'}}>
+              <h5>{book.title_suggest}</h5>
+              <p>{author}</p>
+              <p>{publication}</p>
+            </Card.Text>
+            <Link to='/library' ><Button style={{ bottom: '15px' }} variant='warning' onClick={() => saveBook(book)}>Save Book</Button></Link>
           </Card.Body>
         </Card>
       )
@@ -92,9 +94,11 @@ const AddBook: React.FC<IAddBook> = ({libraryId, setSelectedBook, newStatus, set
             <input type='submit' value='Search' className="btn btn-warning" />
           </form>
         </div>
-        <CardColumns>
-          {searchResults}
-        </CardColumns>
+        <div className='container'>
+          <CardColumns>
+            {searchResults}
+          </CardColumns>
+        </div>
       </Tab>
       <Tab eventKey="isbn" title="Search ISBN">
         <div style={{height: '70px'}}>

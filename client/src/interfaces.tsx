@@ -43,11 +43,17 @@ export interface IIdProps {
 
 export interface INav {
   logout: Function;
+  libraryId: string;
 }
 
 export interface SingleNote {
   date: string;
   content: string;
+}
+
+export interface LibraryCard {
+  date: string;
+  name: string;
 }
 
 export interface IUser extends mongoose.Document {

@@ -2,7 +2,9 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import moment from 'moment';
 
-import { IIdProps, ILoan } from './interfaces';
+import Table from 'react-bootstrap/Table';
+
+import { IIdProps, ILoan, LibraryCard } from './interfaces';
 
 const Loan: React.FC<IIdProps> = ({selectedBookId, libraryId}) => {
   const [ loan, setLoan ] = useState<ILoan>({} as ILoan);
@@ -43,8 +45,14 @@ const Loan: React.FC<IIdProps> = ({selectedBookId, libraryId}) => {
   // past loans
   var loanHistory;
   if (loan !== null && Object.keys(loan).length > 0) {
-    loanHistory = loan.loans.map((entry, index ) => {
-      return <p key={index} >{entry.date} - {entry.name}</p>
+    loanHistory = loan.loans.map((entry: LibraryCard, index: number) => {
+      return (
+        <tr key={index} >
+          <td>{index + 1}</td>
+          <td>{entry.date}</td>
+          <td>{entry.name}</td>
+        </tr>
+      )
     })
   } else {
     loanHistory = <p></p>
@@ -62,7 +70,7 @@ const Loan: React.FC<IIdProps> = ({selectedBookId, libraryId}) => {
       <div>
         <form onSubmit={loanBook} >
           <input type='text' name='name' placeholder='Loan book to...' value={name} onChange={handleNameChange} />
-          <input type='submit' value='Loan Book' />
+          <input className='btn btn-warning' type='submit' value='Loan Book' />
         </form>
       </div>
   }
@@ -70,9 +78,35 @@ const Loan: React.FC<IIdProps> = ({selectedBookId, libraryId}) => {
   return(
       <div>
         {loanOptions}
-        {loanHistory}
+        <Table>
+          <thead>
+            <th>#</th>
+            <th>Date</th>
+            <th>Name</th>
+          </thead>
+          <tbody>
+            {loanHistory}
+          </tbody>
+        </Table>
       </div>
     )
 }
 
 export default Loan;
+
+{/* <Table striped bordered hover size="sm">
+  <thead>
+    <tr>
+      <th>#</th>
+      <th>First Name</th>
+      <th>Last Name</th>
+      <th>Username</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>1</td>
+      <td>Mark</td>
+      <td>Otto</td>
+      <td>@mdo</td>
+    </tr> */}

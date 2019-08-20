@@ -13,10 +13,20 @@ input:focus {
   margin: 14px;
 }
 
+.app {
+  margin: 0 auto;
+  height: 100vh;
+}
+
 .nav-link {
   color: #FFC107;
 }
 
 .nav-link:hover {
   color: rgb(184, 139, 6)
+}
+
+.signup {
+  text-align: center;
+  padding: 20px;
 }

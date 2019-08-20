@@ -6,6 +6,8 @@ import {
   Link
 } from 'react-router-dom';
 
+import Button from 'react-bootstrap/Button';
+
 // components
 import Login from './Login';
 import Signup from './Signup';
@@ -58,26 +60,24 @@ const App: React.FC = () => {
   if (Object.keys(user).length > 0) {
     contents = (
       <>
-        <Nav logout={logout} />
-        <br />
         <Route path='/' render={() => <Profile libraryId={user.library} />} />
       </>
     )
   } else {
     contents = (
       <>
-        <p>Please Log In or Sign Up</p>
-        <Link to='/login' >Login</Link>
-        <Link to='/signup' >Sign Up</Link>
         <Route path='/login' render={(props) => <Login setToken={setToken} {...props} /> } />
         <Route path='/signup' render={(props) => <Signup setToken={setToken} {...props} /> } />        
       </>
     )
   }
-
+  
   return (
     <Router >
-      {contents}
+      <div className='app' >
+        <Nav logout={logout} libraryId={user.library} />
+        {contents}
+      </div>
     </Router>
   );
 }
