@@ -2,7 +2,7 @@
 
 Browse your personal library, add new books, and keep track of who borrowed books when. Optimized for mobile first!
 
-Check it out [here](enigmatic-spring-36434.herokuapp.com)
+Check it out [here](https://enigmatic-spring-36434.herokuapp.com/)
 
 ![bookdetails](src/img/bookdetails.png)
 
