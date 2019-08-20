@@ -75,7 +75,11 @@ const AddBook: React.FC<IAddBook> = ({libraryId, setSelectedBook, newStatus, set
               <p>{author}</p>
               <p>{publication}</p>
             </Card.Text>
-            <Link to='/library' ><Button style={{ bottom: '15px' }} variant='warning' onClick={() => saveBook(book)}>Save Book</Button></Link>
+            <Link to='/library' >
+              <Button style={{ bottom: '15px' }} 
+                variant='warning' 
+                onClick={() => saveBook(book)}>Save Book</Button>
+            </Link>
           </Card.Body>
         </Card>
       )

@@ -52,7 +52,11 @@ const BookNotes: React.FC<IIdProps> = ({selectedBookId, libraryId}) => {
     <div>
       <div>
       <form onSubmit={saveNote}>
-        <input type='text' name='content' placeholder='Add A Note...' value={content} onChange={handleContentChange} />
+        <input type='text' 
+          name='content' 
+          placeholder='Add A Note...' 
+          value={content} 
+          onChange={handleContentChange} />
         <input className='btn btn-warning' type='submit' value='Add Notes' />
       </form>
       </div>
