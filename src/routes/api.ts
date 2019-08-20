@@ -14,41 +14,19 @@ router.get('/library/:id', (req, res) => {
   })
 })
 
-// GET /api/library/:lid/:bid - get loan associated with a book
-router.get('/library/:lid/:bid', (req, res) => {
+// GET /api/loan/:lid/:bid - get loan associated with a book
+router.get('/loan/:lid/:bid', (req, res) => {
   Loan.findOne({libraryId: req.params.lid, bookId: req.params.bid}, (err, loan: ILoan) => {
     if (err) res.json(err)
     res.json(loan)
   })
 })
 
-// GET /api/library/:lid/:bid/notes - get notes for a book
-router.get('/library/notes/:lid/:bid', (req, res) => {
+// GET /api/:lid/:bid/notes - get notes for a book
+router.get('/notes/:lid/:bid', (req, res) => {
   Note.findOne({libraryId: req.params.lid, bookId: req.params.bid}, (err, notes: INote) => {
     if (err) res.json(err)
     res.json(notes)
-  })
-})
-
-// POST /api/library/notes - post a note to a book
-router.post('/library/notes', (req, res) => {
-  Note.findOne({libraryId: req.body.libraryId, bookId: req.body.bookId}, (err, notes: INote) => {
-    if (err) res.json(err)
-    if (!notes) {
-      Note.create({
-        libraryId: req.body.libraryId,
-        bookId: req.body.bookId,
-      }, (err, notes: INote) => {
-        if (err) res.json(err)
-        notes.notes.push({date: req.body.date, content: req.body.content})
-        notes.save()
-        res.json(notes)
-      })
-    } else {
-      notes.notes.push({date: req.body.date, content: req.body.content})
-      notes.save()
-      res.json(notes)
-    }
   })
 })
 
@@ -87,8 +65,8 @@ router.post('/library/loan', (req, res) => {
     if (err) res.json(err)
     if (!loan) {
       Loan.create({
-        bookId: req.params.bid,
-        libraryId: req.params.lid,
+        bookId: req.body.bookId,
+        libraryId: req.body.libraryId,
         currentStatus: true,
         loan: []
       }, (err, loan: ILoan) => {
@@ -102,6 +80,28 @@ router.post('/library/loan', (req, res) => {
       loan.currentStatus = true
       loan.save()
       res.json(loan)
+    }
+  })
+})
+
+// POST /api/library/notes - post a note to a book
+router.post('/library/notes', (req, res) => {
+  Note.findOne({libraryId: req.body.libraryId, bookId: req.body.bookId}, (err, notes: INote) => {
+    if (err) res.json(err)
+    if (!notes) {
+      Note.create({
+        libraryId: req.body.libraryId,
+        bookId: req.body.bookId,
+      }, (err, notes: INote) => {
+        if (err) res.json(err)
+        notes.notes.push({date: req.body.date, content: req.body.content})
+        notes.save()
+        res.json(notes)
+      })
+    } else {
+      notes.notes.push({date: req.body.date, content: req.body.content})
+      notes.save()
+      res.json(notes)
     }
   })
 })

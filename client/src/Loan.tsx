@@ -36,7 +36,7 @@ const Loan: React.FC<IIdProps> = ({selectedBookId, libraryId}) => {
   }
 
   useEffect(() => {
-    axios.get(`/api/library/${libraryId}/${selectedBookId}`)
+    axios.get(`/api/loan/${libraryId}/${selectedBookId}`)
       .then(res => {
         setLoan(res.data)
       })
@@ -62,8 +62,8 @@ const Loan: React.FC<IIdProps> = ({selectedBookId, libraryId}) => {
   var loanOptions;
   if (loan !== null && loan.currentStatus === true) {
     loanOptions = 
-    <div>
-      <button onClick={checkInBook} >Check In</button>
+    <div style={{height: '68px', padding: '15px' }}>
+      <button className='btn btn-warning' onClick={checkInBook} >Check In</button>
     </div>
   } else {
     loanOptions = 
@@ -93,20 +93,3 @@ const Loan: React.FC<IIdProps> = ({selectedBookId, libraryId}) => {
 }
 
 export default Loan;
-
-{/* <Table striped bordered hover size="sm">
-  <thead>
-    <tr>
-      <th>#</th>
-      <th>First Name</th>
-      <th>Last Name</th>
-      <th>Username</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>1</td>
-      <td>Mark</td>
-      <td>Otto</td>
-      <td>@mdo</td>
-    </tr> */}

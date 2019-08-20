@@ -28,7 +28,7 @@ const BookNotes: React.FC<IIdProps> = ({selectedBookId, libraryId}) => {
   }
 
   useEffect(() => {
-    axios.get(`/api/library/notes/${libraryId}/${selectedBookId}`)
+    axios.get(`/api/notes/${libraryId}/${selectedBookId}`)
       .then(res => {
         setNote(res.data)
       })
@@ -50,10 +50,12 @@ const BookNotes: React.FC<IIdProps> = ({selectedBookId, libraryId}) => {
 
   return(
     <div>
+      <div>
       <form onSubmit={saveNote}>
         <input type='text' name='content' placeholder='Add A Note...' value={content} onChange={handleContentChange} />
         <input className='btn btn-warning' type='submit' value='Add Notes' />
       </form>
+      </div>
       <Table>
         <thead>
           <th>Date</th>

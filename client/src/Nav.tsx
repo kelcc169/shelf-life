@@ -19,7 +19,7 @@ const Navigation: React.FC<INav> = ({logout, libraryId}) => {
     <>
       <Nav>
         <Link to='/library' className="nav-link" >Library</Link>
-        <Link to='/library/add' className="nav-link">Add A Book</Link>
+        <Link to='/library/add' className="nav-link">Add Book</Link>
       </Nav>
       <Nav>
         <Link to='/' className="nav-link" onClick={(e) => logout(e)}>Logout</Link>
@@ -29,7 +29,7 @@ const Navigation: React.FC<INav> = ({logout, libraryId}) => {
   
   return(
     <Navbar sticky="top" bg="warning" className="justify-content-between">
-      <Navbar.Brand>Shelf-Life</Navbar.Brand>
+      <Navbar.Brand><i className="fas fa-book" />  Shelf-Life</Navbar.Brand>
       {links}
     </Navbar>
   )
