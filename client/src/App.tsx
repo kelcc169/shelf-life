@@ -70,8 +70,8 @@ const App: React.FC = () => {
         <nav className="justify-content-between navbar navbar-expand navbar-light sticky-top bg-warning ">
           <span className='navbar-brand'><i className="fas fa-book" />  Shelf-Life</span>
           <Nav>
-            <Link to='/signup' className='nav-link' >Sign Up</Link>
-            <Link to='/login' className='nav-link' >Login</Link>
+            <Link to='/signup' className='nav-link topnav' >Sign Up</Link>
+            <Link to='/login' className='nav-link topnav' >Login</Link>
           </Nav>
         </nav>
         <Route path='/login' render={(props) => <Login setToken={setToken} {...props} /> } />
