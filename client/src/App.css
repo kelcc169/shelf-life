@@ -23,11 +23,12 @@ input:focus {
 }
 
 .nav-link:hover {
-  color: rgb(184, 139, 6)
+  color: rgb(184, 139, 6);
 }
 
 .topnav {
-  color: rgba(0, 0, 0, 0.7)
+  color: rgba(0, 0, 0, 0.7);
+  padding: 8px;
 }
 
 .signup {
