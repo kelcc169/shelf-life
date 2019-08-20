@@ -51,10 +51,8 @@ I used a Trello board to manage tasks. Check it out [here](https://trello.com/b/
 ## Future Additions!
 - [ ] A barcode reader! While not all books have their ISBN in the barcode, most books since 2001 do, so searching by taking a picture of the barcode and using the data to query the api would be amazing.
 - [ ] Custom tagging of books. I have maybe 12 different versions of a kids book, being able to just find those by searching the library would be helpful
-- [ ] User library seraches. It would be interesting to search by book and see the libraries of other users that have the same books as you and what things they might have that you don't.
+- [ ] User library searches. It would be interesting to search by book and see the libraries of other users that have the same books as you and what things they might have that you don't.
 
 ## Screenshots
 
-### Library Filter
-![libraryfilter](src/img/libraryfilter.png) ![booksearch](src/img/booksearch.png)
-![bookloan](src/img/bookloan.png) ![booknotes](src/img/booknotes.png)
+![libraryfilter](src/img/libraryfilter.png) ![booksearch](src/img/booksearch.png) ![bookloan](src/img/bookloan.png) ![booknotes](src/img/booknotes.png)
