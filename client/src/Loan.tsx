@@ -84,9 +84,11 @@ const Loan: React.FC<IIdProps> = ({selectedBookId, libraryId}) => {
         {loanOptions}
         <Table>
           <thead>
-            <th>#</th>
-            <th>Date</th>
-            <th>Name</th>
+            <tr>
+              <th>#</th>
+              <th>Date</th>
+              <th>Name</th>
+            </tr>
           </thead>
           <tbody>
             {loanHistory}

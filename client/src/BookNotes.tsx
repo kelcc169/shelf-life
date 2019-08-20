@@ -62,8 +62,10 @@ const BookNotes: React.FC<IIdProps> = ({selectedBookId, libraryId}) => {
       </div>
       <Table>
         <thead>
-          <th>Date</th>
-          <th>Note</th>
+          <tr>
+            <th>Date</th>
+            <th>Note</th>
+          </tr>
         </thead>
         <tbody>
           {noteContent}
