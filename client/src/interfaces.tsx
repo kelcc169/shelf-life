@@ -43,7 +43,6 @@ export interface IIdProps {
 
 export interface INav {
   logout: Function;
-  libraryId: string;
 }
 
 export interface SingleNote {

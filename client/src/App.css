@@ -26,6 +26,10 @@ input:focus {
   color: rgb(184, 139, 6)
 }
 
+.topnav {
+  color: rgba(0, 0, 0, 0.7)
+}
+
 .signup {
   text-align: center;
   padding: 20px;

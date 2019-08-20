@@ -3,7 +3,6 @@ dotenv.config();
 
 import express from 'express';
 import mongoose from 'mongoose';
-import expressJWT from 'express-jwt';
 import helmet from 'helmet';
 
 const app = express();

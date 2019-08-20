@@ -46,7 +46,11 @@ I used a Trello board to manage tasks. Check it out [here](https://trello.com/b/
 
 ## Thoughts
 
-- Typescript was a challenge, particularly when integrating it into React with Hooks, to which I really only had a cursory introduction.  All the planning I did at the beginning helped a lot, though I don't have everything implemented to the degree I'd like. This project leaves a lot of room for growth and added features, and I look forward to seeing what I can include going forward.
+- Typescript was a challenge, particularly when integrating it into React with Hooks, to which I really only had a cursory introduction.  All the planning I did at the beginning helped a lot. In particular, I'm glad I sought help from a program manager on how to appropriately figure out specs.
+
+- I rewrote a template that I already had in javascript into typescript. It was great for both a deeper understanding of the jwt authorization and setting me up to feel more comfortable writing the rest of the app in typescript.
+
+- I started with the backend /api routes for GET and POST for libraries and books so I had something to start with, leaving space for the additional models to be added in later as the other got solidified. Coupled with the Trello board, I think that helped keep things under control. I didn't over extend and write more than I think I needed. It also meant that I didn't move on until things worked, so it limited where possible errors were coing from.
 
 ## Future Additions!
 - [ ] A barcode reader! While not all books have their ISBN in the barcode, most books since 2001 do, so searching by taking a picture of the barcode and using the data to query the api would be amazing.
