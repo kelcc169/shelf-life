@@ -45,20 +45,20 @@ const BookNotes: React.FC<IIdProps> = ({selectedBookId, libraryId}) => {
       )       
     })
   } else {
-    noteContent = <p>No Notes Yet!</p>
+    noteContent = <p></p>
   }
 
   return(
     <div>
       <div>
-      <form onSubmit={saveNote}>
-        <input type='text' 
-          name='content' 
-          placeholder='Add A Note...' 
-          value={content} 
-          onChange={handleContentChange} />
-        <input className='btn btn-warning' type='submit' value='Add Notes' />
-      </form>
+        <form onSubmit={saveNote}>
+          <input type='text' 
+            name='content' 
+            placeholder='Add A Note...' 
+            value={content} 
+            onChange={handleContentChange} />
+          <input className='btn btn-warning' type='submit' value='Add Notes' />
+        </form>
       </div>
       <Table>
         <thead>
