@@ -28,7 +28,7 @@ const AddBook: React.FC<IAddBook> = ({libraryId, setSelectedBook, newStatus, set
   // call api for book options - title
   function handleTitleSubmit(e: React.FormEvent) {
     e.preventDefault()
-    axios.get(`http://openlibrary.org/search.json?title=${searchTitle}&limit=20`)
+    axios.get(`https://openlibrary.org/search.json?title=${searchTitle}&limit=20`)
       .then(res => {
         setResults(res.data)
       })
@@ -37,7 +37,7 @@ const AddBook: React.FC<IAddBook> = ({libraryId, setSelectedBook, newStatus, set
   // call api for book - isbn
   function handleIsbnSubmit(e: React.FormEvent) {
     e.preventDefault()
-    axios.get(`http://openlibrary.org/search.json?isbn=${searchIsbn}&limit=20`)
+    axios.get(`https://openlibrary.org/search.json?isbn=${searchIsbn}&limit=20`)
       .then(res => {
         setResults(res.data)
       })
