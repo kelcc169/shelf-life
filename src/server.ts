@@ -10,6 +10,7 @@ const app = express();
 app.use(express.urlencoded({extended: false}));
 app.use(express.json());
 app.use(helmet());
+app.use(express.static(__dirname + '/../client/build'))
 
 mongoose.connect(process.env.MONGODB_URI as string, {useNewUrlParser: true});
 const db = mongoose.connection;
@@ -25,5 +26,9 @@ app.use('/auth', authRouter)
 
 import apiRouter from './routes/api';
 app.use('/api', apiRouter);
+
+app.get('*', (req, res) => {
+  res.sendFile('index.html')
+})
 
 app.listen(process.env.PORT || 3001);
