@@ -111,9 +111,11 @@ const AddBook: React.FC<IAddBook> = ({libraryId, setSelectedBook, newStatus, set
             <input type='submit' value='Search' className="btn btn-warning" />
           </form>
         </div>
-        <CardColumns>
-          {searchResults}
-        </CardColumns>
+        <div className='container'>
+          <CardColumns>
+            {searchResults}
+          </CardColumns>
+        </div>
       </Tab>
     </Tabs>
   </div>
