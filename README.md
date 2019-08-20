@@ -59,4 +59,4 @@ I used a Trello board to manage tasks. Check it out [here](https://trello.com/b/
 
 ## Screenshots
 
-![libraryfilter](src/img/libraryfilter.png) ![booksearch](src/img/booksearch.png) ![bookloan](src/img/bookloan.png) ![booknotes](src/img/booknotes.png)
+![libraryfilter](src/img/libraryfilter.png)  ![booksearch](src/img/booksearch.png)  ![bookloan](src/img/bookloan.png)  ![booknotes](src/img/booknotes.png)
