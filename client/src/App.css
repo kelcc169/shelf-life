@@ -2,3 +2,21 @@ body {
   margin: 0 auto;
   font-family: 'Averia Gruesa Libre', cursive;
 }
+
+input {
+  margin: 15px;
+}
+
+input:focus {
+  outline: none !important;
+  border:3px solid #FFC107;
+  margin: 14px;
+}
+
+.nav-link {
+  color: #FFC107;
+}
+
+.nav-link:hover {
+  color: rgb(184, 139, 6)
+}

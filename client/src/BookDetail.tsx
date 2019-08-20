@@ -34,9 +34,10 @@ const BookDetail: React.FC<IBookProps> = ({selectedBook, removeBook, libraryId})
         <h3>{details.title}</h3>
         <Tabs defaultActiveKey="details" id="uncontrolled-tab-example">
           <Tab eventKey="details" title="Details">
-            <div>
+            <div style={{textAlign: 'center', padding: '25px'}}>
               <h5>Author - {selectedBook.author}</h5>
               {image}
+              <br />
               <Link to='/library' ><button onClick={() => removeBook(selectedBook._id)} >Remove Book</button></Link>
             </div>
           </Tab>

@@ -1,8 +1,12 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
+
 import Tabs from 'react-bootstrap/Tabs';
 import Tab from 'react-bootstrap/Tab';
+import Card from 'react-bootstrap/Card';
+import CardColumns from 'react-bootstrap/CardColumns';
+import Button from 'react-bootstrap/Button';
 
 import { IAddBook } from './interfaces';
 
@@ -64,12 +68,14 @@ const AddBook: React.FC<IAddBook> = ({libraryId, setSelectedBook, newStatus, set
       }
       
       return(
-      <div key={index} >
-        <p>{book.title_suggest}</p>
-        <p>{author}</p>
-        <p>{publication}</p>
-        <Link to='/library' ><button onClick={() => saveBook(book)}>Save Book</button></Link>
-      </div>
+        <Card key={index} style={{ minHeight: '200px', border: '3px solid #FFC107' }}>
+          <Card.Body style={{textAlign: 'center'}}>
+            <h5>{book.title_suggest}</h5>
+            <p>{author}</p>
+            <p>{publication}</p>
+            <Link to='/library' ><Button variant='warning' onClick={() => saveBook(book)}>Save Book</Button></Link>
+          </Card.Body>
+        </Card>
       )
     })
   } else {
@@ -77,27 +83,29 @@ const AddBook: React.FC<IAddBook> = ({libraryId, setSelectedBook, newStatus, set
   }
 
   return(
-    // <div>
     <div>
-    {/* <h5>Search for Books</h5> */}
     <Tabs defaultActiveKey="title" id="uncontrolled-tab-example">
       <Tab eventKey="title" title="Search Titles">
-        <div>
+        <div style={{height: '70px'}}>
           <form onSubmit={handleTitleSubmit} >
             <input type='text' name='title' placeholder='Book Title' value={searchTitle} onChange={handleTitleChange} />
-            <input type='submit' value='Search' />
+            <input type='submit' value='Search' className="btn btn-warning" />
           </form>
         </div>
-        {searchResults}
+        <CardColumns>
+          {searchResults}
+        </CardColumns>
       </Tab>
       <Tab eventKey="isbn" title="Search ISBN">
-        <div>
+        <div style={{height: '70px'}}>
           <form onSubmit={handleIsbnSubmit} >
             <input type='text' name='isbn' placeholder='Book ISBN' value={searchIsbn} onChange={handleIsbnChange} />
-            <input type='submit' value='Search' />
+            <input type='submit' value='Search' className="btn btn-warning" />
           </form>
         </div>
-        {searchResults}
+        <CardColumns>
+          {searchResults}
+        </CardColumns>
       </Tab>
     </Tabs>
   </div>

@@ -75,7 +75,6 @@ const App: React.FC = () => {
     )
   }
 
-  // add a nav bar please!
   return (
     <Router >
       {contents}

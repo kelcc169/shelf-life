@@ -1,6 +1,9 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 
+import Card from 'react-bootstrap/Card';
+import CardColumns from 'react-bootstrap/CardColumns';
+
 import SearchFilter from './SearchFilter';
 
 import { IBook, ISelectBook } from './interfaces';
@@ -16,20 +19,24 @@ const BookList: React.FC<ISelectBook> = ({books, setSelectedBook}) => {
 
     const filteredList = bookFilter.map((book: IBook, index: number) => {
       return (
-      <div className="card" onClick={() =>setSelectedBook(book)} key={index}>
-          <Link to={`/books/${book.isbn}`} >
-          <div className="card-body">
-            <h5 className="card-title">{book.title}</h5>
-            <h6 className="card-subtitle mb-2 text-muted">{book.author}</h6>
-          </div>
-            </Link>
-      </div>
+      <Card style={{ height: '150px', border: '3px solid #FFC107' }} border='warning' onClick={() => setSelectedBook(book)} key={index}>
+        <Link to={`/books/${book.isbn}`} style={{color: 'black', textDecoration: 'none'}}>
+        <Card.Body style={{textAlign: 'center'}}>
+          <h5>{book.title}</h5>
+          <h6>{book.author}</h6>
+        </Card.Body>
+        </Link>
+      </Card>
       )
     })
     return(
       <>
         <SearchFilter setFilter={setFilter} filter={filter} />
-        {filteredList}
+        <div style={{padding: '5px 15px'}}>
+          <CardColumns>
+            {filteredList}
+          </CardColumns>
+        </div>
       </>
       )
   } else {
