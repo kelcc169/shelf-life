@@ -41,6 +41,5 @@
     "@types/axios": "^0.14.0",
     "@types/react-bootstrap": "^0.32.19",
     "@types/react-router-dom": "^4.3.4"
-  },
-  "proxy": "http://localhost:3001"
+  }
 }

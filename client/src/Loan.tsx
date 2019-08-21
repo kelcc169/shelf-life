@@ -69,7 +69,11 @@ const Loan: React.FC<IIdProps> = ({selectedBookId, libraryId}) => {
     loanOptions = 
       <div>
         <form onSubmit={loanBook} >
-          <input type='text' name='name' placeholder='Loan book to...' value={name} onChange={handleNameChange} />
+          <input type='text' 
+            name='name' 
+            placeholder='Loan book to...' 
+            value={name} 
+            onChange={handleNameChange} />
           <input className='btn btn-warning' type='submit' value='Loan Book' />
         </form>
       </div>
@@ -80,9 +84,11 @@ const Loan: React.FC<IIdProps> = ({selectedBookId, libraryId}) => {
         {loanOptions}
         <Table>
           <thead>
-            <th>#</th>
-            <th>Date</th>
-            <th>Name</th>
+            <tr>
+              <th>#</th>
+              <th>Date</th>
+              <th>Name</th>
+            </tr>
           </thead>
           <tbody>
             {loanHistory}

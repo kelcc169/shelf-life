@@ -33,9 +33,24 @@ const Profile: React.FC<ILibraryProps> = ({libraryId}) => {
 
   return(
     <>
-      <Route exact path='/library' render={() => <BookList setSelectedBook={setSelectedBook} books={books} /> } />
-      <Route path='/library/add' render={() => <AddBook libraryId={libraryId} setSelectedBook={setSelectedBook} setNewStatus={setNewStatus} newStatus={newStatus} /> } />
-      <Route path={`/books/${selectedBook.isbn}`} render={() => <BookDetail selectedBook={selectedBook} removeBook={removeBook} libraryId={libraryId} /> } />
+      <Route exact path='/library' 
+        render={() => 
+        <BookList 
+          setSelectedBook={setSelectedBook} 
+          books={books} /> } />
+      <Route path='/library/add' 
+        render={() => 
+        <AddBook 
+          libraryId={libraryId} 
+          setSelectedBook={setSelectedBook} 
+          setNewStatus={setNewStatus} 
+          newStatus={newStatus} /> } />
+      <Route path={`/books/${selectedBook.isbn}`} 
+        render={() => 
+        <BookDetail 
+          selectedBook={selectedBook} 
+          removeBook={removeBook} 
+          libraryId={libraryId} /> } />
     </>
   )
 }

@@ -1,8 +1,8 @@
 # Shelf Life
 
-Browse your personal library, add new books, and keep track of who borrowed books when.
+Browse your personal library, add new books, and keep track of who borrowed books when. Optimized for mobile first!
 
-Check it out here: LINK PENDING
+Check it out [here](https://enigmatic-springs-36434.herokuapp.com/)
 
 ![bookdetails](src/img/bookdetails.png)
 
@@ -59,6 +59,4 @@ I used a Trello board to manage tasks. Check it out [here](https://trello.com/b/
 
 ## Screenshots
 
-![libraryfilter](src/img/libraryfilter.png)    ![booksearch](src/img/booksearch.png)
-
-![bookloan](src/img/bookloan.png)    ![booknotes](src/img/booknotes.png)
+![libraryfilter](src/img/libraryfilter.png)  ![booksearch](src/img/booksearch.png)  ![bookloan](src/img/bookloan.png)  ![booknotes](src/img/booknotes.png)

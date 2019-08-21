@@ -28,7 +28,7 @@ const AddBook: React.FC<IAddBook> = ({libraryId, setSelectedBook, newStatus, set
   // call api for book options - title
   function handleTitleSubmit(e: React.FormEvent) {
     e.preventDefault()
-    axios.get(`http://openlibrary.org/search.json?title=${searchTitle}&limit=20`)
+    axios.get(`https://openlibrary.org/search.json?title=${searchTitle}&limit=20`)
       .then(res => {
         setResults(res.data)
       })
@@ -37,7 +37,7 @@ const AddBook: React.FC<IAddBook> = ({libraryId, setSelectedBook, newStatus, set
   // call api for book - isbn
   function handleIsbnSubmit(e: React.FormEvent) {
     e.preventDefault()
-    axios.get(`http://openlibrary.org/search.json?isbn=${searchIsbn}&limit=20`)
+    axios.get(`https://openlibrary.org/search.json?isbn=${searchIsbn}&limit=20`)
       .then(res => {
         setResults(res.data)
       })
@@ -75,7 +75,11 @@ const AddBook: React.FC<IAddBook> = ({libraryId, setSelectedBook, newStatus, set
               <p>{author}</p>
               <p>{publication}</p>
             </Card.Text>
-            <Link to='/library' ><Button style={{ bottom: '15px' }} variant='warning' onClick={() => saveBook(book)}>Save Book</Button></Link>
+            <Link to='/library' >
+              <Button style={{ bottom: '15px' }} 
+                variant='warning' 
+                onClick={() => saveBook(book)}>Save Book</Button>
+            </Link>
           </Card.Body>
         </Card>
       )
@@ -107,7 +111,7 @@ const AddBook: React.FC<IAddBook> = ({libraryId, setSelectedBook, newStatus, set
             <input type='submit' value='Search' className="btn btn-warning" />
           </form>
         </div>
-        <div>
+        <div className='container'>
           <CardColumns>
             {searchResults}
           </CardColumns>
