@@ -13,6 +13,7 @@ import Login from './Login';
 import Signup from './Signup';
 import Profile from './Profile';
 import Navigation from './Nav';
+import LandingPage from './LandingPage';
 import './App.css';
 
 // interfaces
@@ -74,16 +75,7 @@ const App: React.FC = () => {
             <Link to='/login' className='nav-link topnav' >Login</Link>
           </Nav>
         </nav>
-        <div className='landing-page'>
-          <div className='info'>
-            <h3>Welcome to Shelf-Life!</h3>
-            <p>Shelf-Life is a personal library app.</p> 
-            <p>Manage what's in your library.</p>
-            <p>Keep track of who you've loaned books to.</p>
-            <p>Make personal notes about each book.</p>
-          </div>
-          <p style={{ color: 'rgb(250, 228, 161)', position: 'fixed', bottom: '2px', right: '5px'}}>Photo by Erol Ahmed on Unsplash</p>
-        </div>
+        <Route path='/' render={() => <LandingPage /> } />
         <Route path='/login' render={(props) => <Login setToken={setToken} {...props} /> } />
         <Route path='/signup' render={(props) => <Signup setToken={setToken} {...props} /> } />        
       </>
