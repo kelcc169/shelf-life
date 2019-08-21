@@ -75,7 +75,7 @@ const App: React.FC = () => {
             <Link to='/login' className='nav-link topnav' >Login</Link>
           </Nav>
         </nav>
-        <Route path='/' render={() => <LandingPage /> } />
+        <Route exact path='/' render={() => <LandingPage /> } />
         <Route path='/login' render={(props) => <Login setToken={setToken} {...props} /> } />
         <Route path='/signup' render={(props) => <Signup setToken={setToken} {...props} /> } />        
       </>
