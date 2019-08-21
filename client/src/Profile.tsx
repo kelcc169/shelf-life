@@ -45,7 +45,7 @@ const Profile: React.FC<ILibraryProps> = ({libraryId}) => {
           setSelectedBook={setSelectedBook} 
           setNewStatus={setNewStatus} 
           newStatus={newStatus} /> } />
-      <Route path={`/books/${selectedBook.isbn}`} 
+      <Route path={`/library/books/${selectedBook.isbn}`} 
         render={() => 
         <BookDetail 
           selectedBook={selectedBook} 
