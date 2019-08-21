@@ -85,40 +85,47 @@ const AddBook: React.FC<IAddBook> = ({libraryId, setSelectedBook, newStatus, set
       )
     })
   } else {
-    searchResults = <p></p>
+    searchResults = 
+      <Card style={{ height: '200px', border: '3px solid #FFC107' }} >
+        <Card.Body>
+          <Card.Text>
+            <h5>No results</h5>
+          </Card.Text>
+        </Card.Body>
+      </Card>
   }
 
   return(
     <div>
-    <Tabs defaultActiveKey="title" id="uncontrolled-tab-example">
-      <Tab eventKey="title" title="Search Titles">
-        <div style={{height: '70px'}}>
-          <form onSubmit={handleTitleSubmit} >
-            <input type='text' name='title' placeholder='Book Title' value={searchTitle} onChange={handleTitleChange} />
-            <input type='submit' value='Search' className="btn btn-warning" />
-          </form>
-        </div>
-        <div className='container'>
-          <CardColumns>
-            {searchResults}
-          </CardColumns>
-        </div>
-      </Tab>
-      <Tab eventKey="isbn" title="Search ISBN">
-        <div style={{height: '70px'}}>
-          <form onSubmit={handleIsbnSubmit} >
-            <input type='text' name='isbn' placeholder='Book ISBN' value={searchIsbn} onChange={handleIsbnChange} />
-            <input type='submit' value='Search' className="btn btn-warning" />
-          </form>
-        </div>
-        <div className='container'>
-          <CardColumns>
-            {searchResults}
-          </CardColumns>
-        </div>
-      </Tab>
-    </Tabs>
-  </div>
+      <Tabs defaultActiveKey="title" id="uncontrolled-tab-example">
+        <Tab eventKey="title" title="Search Titles">
+          <div style={{height: '70px'}}>
+            <form onSubmit={handleTitleSubmit} >
+              <input type='text' name='title' placeholder='Book Title' value={searchTitle} onChange={handleTitleChange} />
+              <input type='submit' value='Search' className="btn btn-warning" />
+            </form>
+          </div>
+          <div className='container'>
+            <CardColumns>
+              {searchResults}
+            </CardColumns>
+          </div>
+        </Tab>
+        <Tab eventKey="isbn" title="Search ISBN">
+          <div style={{height: '70px'}}>
+            <form onSubmit={handleIsbnSubmit} >
+              <input type='text' name='isbn' placeholder='Book ISBN' value={searchIsbn} onChange={handleIsbnChange} />
+              <input type='submit' value='Search' className="btn btn-warning" />
+            </form>
+          </div>
+          <div className='container'>
+            <CardColumns>
+              {searchResults}
+            </CardColumns>
+          </div>
+        </Tab>
+      </Tabs>
+    </div>
   )
 }
 

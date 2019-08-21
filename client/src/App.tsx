@@ -62,7 +62,7 @@ const App: React.FC = () => {
     contents = (
       <>
         <Navigation logout={logout} />
-        <Route path='/' render={() => <Profile libraryId={user.library} />} />
+        <Route path='/library' render={() => <Profile libraryId={user.library} />} />
       </>
     )
   } else {
