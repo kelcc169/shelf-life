@@ -35,3 +35,20 @@ input:focus {
   text-align: center;
   padding: 20px;
 }
+
+.landing-page {
+  text-align: center;
+  width: 100%;
+  height: 100%;
+  margin: 0 auto;
+  padding: 50px 20px; 
+  background-image: url('cardcatalog.jpg');
+  background-size: cover;
+  background-attachment: fixed;
+}
+
+.info {
+  background-color: rgb(250, 228, 161);
+  padding: 10px 2px 2px 2px;
+  margin: 0 auto;
+}
