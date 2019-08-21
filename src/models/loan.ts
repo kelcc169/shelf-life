@@ -19,7 +19,7 @@ export interface ILoan extends mongoose.Document {
   bookId: string;
   libraryId: string;
   currentStatus: boolean;
-  loans: LibraryCard[];
+  loans: {date: string; name: string}[];
 }
 
 export default mongoose.model('Loan', loanSchema);
