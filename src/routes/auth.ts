@@ -15,14 +15,14 @@ router.post('/signup', (req, res) => {
         name: req.body.name,
         email: req.body.email,
         password: req.body.password
-      }, (err, user: IUser) => {
+      }, (err: Error, user: IUser) => {
         if (err) {
           res.json({type: 'error', message: 'Database error while creating user'})
         } else {
           Library.create({
             userId: user._id,
             books: []
-          }, (err, library: ILibrary) => {
+          }, (err: Error, library: ILibrary) => {
             if (err) {
               res.json({type: 'error', message: 'Database error while creating library'})
             } else {
@@ -62,7 +62,7 @@ router.post('/me/from/token', (req, res) => {
   if (!token) {
     res.json({type: 'error', message: 'You must submit a valid token'})
   } else {
-    jwt.verify(token, process.env.JWT_SECRET, (err, user: IUser) => {
+    jwt.verify(token, process.env.JWT_SECRET, (err: Error, user: IUser) => {
       if (err) {
         res.json({type: 'error', message: 'Invalid token. Please log in again.'})
       } else {

@@ -39,7 +39,7 @@ router.post('/library/book', (req, res) => {
         title: req.body.title,
         author: req.body.author,
         isbn: req.body.isbn,
-      }, (err, book: IBook) => {
+      }, (err: Error, book: IBook) => {
         if (err) res.json(err)
         Library.findById(req.body.libraryId, (err, library: ILibrary) => {
           if (err) res.json(err)
@@ -69,7 +69,7 @@ router.post('/library/loan', (req, res) => {
         libraryId: req.body.libraryId,
         currentStatus: true,
         loan: []
-      }, (err, loan: ILoan) => {
+      }, (err: Error, loan: ILoan) => {
         if (err) res.json(err)
         loan.loans.push({date: req.body.date, name: req.body.name})
         loan.save()
@@ -92,7 +92,7 @@ router.post('/library/notes', (req, res) => {
       Note.create({
         libraryId: req.body.libraryId,
         bookId: req.body.bookId,
-      }, (err, notes: INote) => {
+      }, (err: Error, notes: INote) => {
         if (err) res.json(err)
         notes.notes.push({date: req.body.date, content: req.body.content})
         notes.save()
